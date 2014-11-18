@@ -1,7 +1,3 @@
-% This is a comment
-
-%Jesper skriver en kommentar h‰r
-%Nu har Bj√∂rn skrivit en till kommentar h√§r
 
 %Boids test
 %Skrev en liten test funktion som implementerar en v‰ldigt enkel boids
