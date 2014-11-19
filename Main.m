@@ -7,8 +7,9 @@ numberOfBoids = 100;
 cohesionFactor = 0.01;
 alignmentFactor = 0.125;
 separationFactor = 1;
-separationRadiee = 1;
+separationRadius = 1;
 maxPositions = [50,50,50];
+maxVelocity = 5;
 % TODO: Maybe put all parameters in a vector to reduce nr of parameters
 % into functions?
 
@@ -21,8 +22,9 @@ PlotBoids(boidPositions);
 for i = 1:numberOfIterations
   for iBoid = 1:numberOfBoids
     
-    boidVelocities(iBoid,:) = UpdateBoidVelocity(boidPositions, boidVelocities,...
-      iBoid,cohesionFactor,alignmentFactor, separationFactor, separationRadiee);
+    boidVelocities(iBoid,:) = UpdateBoidVelocity(boidPositions, ...
+        boidVelocities, iBoid,cohesionFactor,alignmentFactor, ...
+        separationFactor, separationRadius, maxVelocity);
     
   end
   

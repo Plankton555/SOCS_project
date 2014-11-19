@@ -1,6 +1,6 @@
 function boidVelocity = UpdateBoidVelocity(boidPositions, boidVelocities,...
     iBoid, cohesionFactor, alignmentFactor, separationFactor, ...
-    separationRadiee)
+    separationRadius, maxVelocity)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 [numberOfBoids, dimension] = size(boidPositions);
@@ -22,7 +22,7 @@ alignmentVelocity = alignmentFactor * centerOfVelocity;
 for jBoid = 1:numberOfBoids
   if(iBoid ~= jBoid)
     differVector = (boidPositions(jBoid,:) - boidPositions(iBoid,:));
-    if(sqrt(sum(differVector.^2)) < separationRadiee)
+    if(sqrt(sum(differVector.^2)) < separationRadius)
       separationVelocity = separationVelocity - differVector;
     end
   end
@@ -32,8 +32,11 @@ separationVelocity = separationFactor * separationVelocity;
 boidVelocity = boidVelocities(iBoid,:) + cohesionVelocity + ...
   alignmentVelocity + separationVelocity;
 
-% TODO: Restrict maximum velocity
-
+% Restrict maximum velocity
+n = norm(boidVelocity);
+if n>maxVelocity
+    boidVelocity = boidVelocity.*(maxVelocity/n);
+end
 
 end
 
