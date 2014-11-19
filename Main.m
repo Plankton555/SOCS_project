@@ -2,6 +2,9 @@
 %Boids test
 %Skrev en liten test funktion som implementerar en väldigt enkel boids
 %model
+clear all, close all, clc
+
+
 numberOfBoids = 100;
 cohesionFactor = 0.01;
 alignmentFactor = 0.125;
@@ -13,8 +16,8 @@ boidPositions = InitializePositions(numberOfBoids,maxPositions);
 boidVelocities = zeros(numberOfBoids,3);
 
 figure
-PlotBoids(boidPositions);
-
+plotHandler = PlotBoids(boidPositions);
+%%
 for i = 1:100
   for iBoid = 1:numberOfBoids
     
@@ -25,6 +28,6 @@ for i = 1:100
   
   boidPositions = boidPositions + boidVelocities;
   pause(0.1)
-  PlotBoids(boidPositions);
+  UpdatePlotBoids(plotHandler);
   
 end
