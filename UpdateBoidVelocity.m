@@ -15,9 +15,7 @@ separationRadius = paramVector(4);
 maxVelocity = paramVector(5);
 
 %Cohesion part
-centerOfMass = (sum(boidPositions) - boidPositions(iBoid,:))/ ...
-  (numberOfBoids-1);
-cohesionVelocity = cohesionFactor * centerOfMass;
+v1 = RuleCohesion(boidPositions, iBoid, cohesionFactor, numberOfBoids);
 
 %Alignment part
 centerOfVelocity = (sum(boidVelocities) - boidVelocities(iBoid,:))/ ...
@@ -35,8 +33,7 @@ for jBoid = 1:numberOfBoids
 end
 separationVelocity = separationFactor * separationVelocity;
 
-boidVelocity = boidVelocities(iBoid,:) + cohesionVelocity + ...
-  alignmentVelocity + separationVelocity;
+boidVelocity = boidVelocities(iBoid,:) + v1 + alignmentVelocity + separationVelocity;
 
 % Restrict maximum velocity
 n = norm(boidVelocity);
