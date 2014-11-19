@@ -1,9 +1,5 @@
 
-%Boids test
-%Skrev en liten test funktion som implementerar en väldigt enkel boids
-%model
-clear all, close all, clc
-
+clear all; close all; clc;
 
 numberOfIterations = 100;
 numberOfBoids = 100;
@@ -24,12 +20,9 @@ paramVector = [cohesionFactor, alignmentFactor, separationFactor, ...
 boidPositions = InitializePositions(numberOfBoids, maxPositions);
 boidVelocities = zeros(numberOfBoids,3);
 
-
 plotHandler = PlotBoids(boidPositions);
 
-
 for i = 1:numberOfIterations
-
   for iBoid = 1:numberOfBoids
     
     boidVelocities(iBoid,:) = UpdateBoidVelocity(boidPositions, ...
@@ -38,9 +31,10 @@ for i = 1:numberOfIterations
   end
   
   boidPositions = boidPositions + boidVelocities;
+  [boidPositions, boidVelocities] = RestrictBoidsPosVel(boidPositions, ...
+      boidVelocities);
 
   pause(0.1)
   UpdatePlotBoids(plotHandler);
 
-  
 end
