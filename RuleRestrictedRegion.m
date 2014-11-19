@@ -11,11 +11,13 @@ restrictionVelocities = zeros(1,3);
     
     
     for k=indexLow
-      restrictionVelocities(k) = -boidPositions(k)*restrictionFactor;
+      restrictionVelocities(k) = -boidPositions(iBoid,k)*restrictionFactor;
     end
     for k=indexHigh
       restrictionVelocities(k) = -differensVector(k)*restrictionFactor;
     end 
+    
+
 end
 
 

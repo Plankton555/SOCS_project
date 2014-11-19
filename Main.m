@@ -1,5 +1,5 @@
 
-clear all; close all; clc;
+%clear all; close all; clc;
 
 numberOfIterations = 200;
 numberOfBoids = 100;

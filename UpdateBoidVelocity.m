@@ -26,9 +26,7 @@ v3 = RuleSeparation(boidPositions, iBoid, separationFactor, separationRadius, nu
 v4 = RuleRestrictedRegion(boidPositions, maxPos,iBoid, ...
   restrictionFactor);
 
-boidVelocity = boidVelocities(iBoid,:) + v1 + v2 + v3 + ...
-  v4;
-
+boidVelocity = boidVelocities(iBoid,:) + v1 + v2 + v3 + v4;
 
 % Restrict maximum velocity
 n = norm(boidVelocity);
