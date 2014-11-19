@@ -5,7 +5,6 @@ figHandler = figure();
 plotHandler = plot3(boidPositions(:,1),boidPositions(:,2),boidPositions(:,3),'bo');
 hold on
 axis auto
-axis equal
 grid on
 set(figHandler,'DoubleBuffer','on')
 set(plotHandler,'XDataSource','boidPositions(:,1)')
