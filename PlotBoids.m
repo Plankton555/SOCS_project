@@ -1,4 +1,6 @@
 function plotHandler = PlotBoids(boidPositions)
+% TODO: Plot in a way so that direction is visible, e.g. a short line with
+% a symbol at the front end.
 figHandler = figure();
 plotHandler = plot3(boidPositions(:,1),boidPositions(:,2),boidPositions(:,3),'bo');
 hold on
@@ -14,6 +16,8 @@ title('Boid model')
 xlabel('x')
 ylabel('y')
 zlabel('z')
+
+
 
 end
 
