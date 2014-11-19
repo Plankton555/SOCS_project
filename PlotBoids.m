@@ -5,7 +5,8 @@ hold on
 axis([0 maxPositions(1) 0 maxPositions(2) 0 maxPositions(3)])
 grid on
 
-velHandler = quiver3(boidPositions(:,1),boidPositions(:,2),boidPositions(:,3),boidVelocities(:,1),boidVelocities(:,2),boidVelocities(:,3));
+velHandler = quiver3(boidPositions(:,1),boidPositions(:,2),...
+  boidPositions(:,3),boidVelocities(:,1),boidVelocities(:,2),boidVelocities(:,3));
 
 set(figHandler,'DoubleBuffer','on')
 set(posHandler,'XDataSource','boidPositions(:,1)')

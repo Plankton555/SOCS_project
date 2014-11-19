@@ -1,8 +1,8 @@
 
 %clear all; close all; clc;
 
-numberOfIterations = 2000;
-numberOfBoids = 5;
+numberOfIterations = 200;
+numberOfBoids = 100;
 deltaT = 0.5;
 
 % Parameters
