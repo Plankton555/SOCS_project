@@ -1,18 +1,18 @@
 
 clear all; close all; clc;
 
-numberOfIterations = 100;
+numberOfIterations = 200;
 numberOfBoids = 100;
 
-
 % Parameters
-cohesionFactor = 0.01;
+cohesionFactor = 0.05;
 alignmentFactor = 0.125;
 separationFactor = 1;
 separationRadius = 1;
 maxVelocity = 5;
-maxPositions = [50,50,50];
+maxPositions = [100,100,100];
 restrictionFactor = 1;
+
 % Putting all parameters in a vector to reduce nr of parameters into
 % functions. Remember that order is important here!
 paramVector = [cohesionFactor, alignmentFactor, separationFactor, ...
@@ -22,21 +22,20 @@ paramVector = [cohesionFactor, alignmentFactor, separationFactor, ...
 boidPositions = InitializePositions(numberOfBoids, maxPositions);
 boidVelocities = zeros(numberOfBoids,3);
 
-plotHandler = PlotBoids(boidPositions);
-
+[posHandler,velHandler] = PlotBoids(boidPositions,boidVelocities,maxPositions);
+%%
 for i = 1:numberOfIterations
   for iBoid = 1:numberOfBoids
     
     boidVelocities(iBoid,:) = UpdateBoidVelocity(boidPositions, ...
-        boidVelocities, iBoid, paramVector);
+      boidVelocities, iBoid, paramVector);
     
   end
   
+  
   boidPositions = boidPositions + boidVelocities;
-%   [boidPositions, boidVelocities] = RestrictBoidsPosVel(boidPositions, ...
-%       boidVelocities, maxPositions);
-
+  
   pause(0.1)
-  UpdatePlotBoids(plotHandler);
-
+  UpdatePlotBoids(posHandler, velHandler);
+  
 end

@@ -3,10 +3,6 @@ function boidVelocity = UpdateBoidVelocity(boidPositions, boidVelocities,...
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 [numberOfBoids, dimension] = size(boidPositions);
-cohesionVelocity = zeros(1,dimension);
-alignmentVelocity = zeros(1,dimension);
-separationVelocity = zeros(1,dimension);
-restrictionVelocity = zeros(1,dimension);
 
 % Extract parameters from paramVector
 cohesionFactor = paramVector(1);
@@ -24,21 +20,15 @@ v1 = RuleCohesion(boidPositions, iBoid, cohesionFactor, numberOfBoids);
 v2 = RuleAlignment(boidVelocities, iBoid, alignmentFactor, numberOfBoids);
 
 %Separation part
-for jBoid = 1:numberOfBoids
-  if(iBoid ~= jBoid)
-    differVector = (boidPositions(jBoid,:) - boidPositions(iBoid,:));
-    if(sqrt(sum(differVector.^2)) < separationRadius)
-      separationVelocity = separationVelocity - differVector;
-    end
-  end
-end
-separationVelocity = separationFactor * separationVelocity;
+v3 = RuleSeparation(boidPositions, iBoid, separationFactor, separationRadius, numberOfBoids, dimension);
 
-restrictionVelocity = RuleRestrictedRegion(boidPositions, maxPos,iBoid, ...
+
+v4 = RuleRestrictedRegion(boidPositions, maxPos,iBoid, ...
   restrictionFactor);
 
-boidVelocity = boidVelocities(iBoid,:) + v1 + v2 + separationVelocity + ...
-  restrictionVelocity;
+boidVelocity = boidVelocities(iBoid,:) + v1 + v2 + v3 + ...
+  v4;
+
 
 % Restrict maximum velocity
 n = norm(boidVelocity);
