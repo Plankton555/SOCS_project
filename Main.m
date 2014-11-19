@@ -32,7 +32,7 @@ for i = 1:numberOfIterations
   
   boidPositions = boidPositions + boidVelocities;
   [boidPositions, boidVelocities] = RestrictBoidsPosVel(boidPositions, ...
-      boidVelocities);
+      boidVelocities, maxPositions);
 
   pause(0.1)
   UpdatePlotBoids(plotHandler);
