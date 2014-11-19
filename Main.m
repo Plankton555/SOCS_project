@@ -5,11 +5,11 @@ numberOfIterations = 200;
 numberOfBoids = 100;
 
 % Parameters
-cohesionFactor = 0.05;
-alignmentFactor = 0.125;
-separationFactor = 1;
-separationRadius = 1;
-maxVelocity = 5;
+cohesionFactor = 0.01;
+alignmentFactor = 0.08;
+separationFactor = 0.05;
+separationRadius = 15;
+maxVelocity = 3;
 maxPositions = [100,100,100];
 restrictionFactor = 1;
 
