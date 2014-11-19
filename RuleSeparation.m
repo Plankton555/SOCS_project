@@ -9,7 +9,8 @@ for jBoid = 1:numberOfBoids
   if(iBoid ~= jBoid)
     differVector = (boidPositions(jBoid,:) - boidPositions(iBoid,:));
     if(sqrt(sum(differVector.^2)) < separationRadius)
-      separationVelocity = separationVelocity - 1./differVector;
+      separationVelocity = separationVelocity - 1./(differVector+0.2);
+      %BEWARE OF MAGICAL NUMBERS!
     end
   end
 end

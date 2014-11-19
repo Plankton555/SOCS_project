@@ -9,10 +9,10 @@ deltaT = 0.5;
 cohesionFactor = 0.01;
 alignmentFactor = 0.15;
 separationFactor = 0.01;
-separationRadius = 15;
+separationRadius = 20;
 maxVelocity = 3;
 maxPositions = [100,100,100];
-restrictionFactor = 1;
+restrictionFactor = 0.1;
 
 % Putting all parameters in a vector to reduce nr of parameters into
 % functions. Remember that order is important here!
@@ -36,7 +36,8 @@ for i = 1:numberOfIterations
   
   boidPositions = boidPositions + deltaT.*boidVelocities;
   
-  pause(0.01)
+  %pause(0.01)
   UpdatePlotBoids(posHandler, velHandler);
+  drawnow;
   
 end
