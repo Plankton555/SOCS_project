@@ -20,8 +20,8 @@ paramVector = [cohesionFactor, alignmentFactor, separationFactor, ...
 boidPositions = InitializePositions(numberOfBoids, maxPositions);
 boidVelocities = zeros(numberOfBoids,3);
 
-plotHandler = PlotBoids(boidPositions);
-
+[plotHandler,velHandler] = PlotBoids(boidPositions,boidVelocities,maxPositions);
+%%
 for i = 1:numberOfIterations
   for iBoid = 1:numberOfBoids
     
@@ -35,6 +35,6 @@ for i = 1:numberOfIterations
       boidVelocities, maxPositions);
 
   pause(0.1)
-  UpdatePlotBoids(plotHandler);
+  UpdatePlotBoids(plotHandler,velHandler);
 
 end
