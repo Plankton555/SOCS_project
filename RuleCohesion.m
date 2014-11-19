@@ -5,7 +5,7 @@ function cohesionVelocity = RuleCohesion(boidPositions, iBoid, ...
 
 centerOfMass = (sum(boidPositions) - boidPositions(iBoid,:))/ ...
   (numberOfBoids-1);
-cohesionVelocity = cohesionFactor * centerOfMass;
+cohesionVelocity = cohesionFactor * (centerOfMass - boidPositions(iBoid,:));
 
 end
 
