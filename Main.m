@@ -1,8 +1,9 @@
 
 clear all; close all; clc;
 
-numberOfIterations = 200;
+numberOfIterations = 2000;
 numberOfBoids = 100;
+deltaT = 0.1;
 
 % Parameters
 cohesionFactor = 0.01;
@@ -33,9 +34,9 @@ for i = 1:numberOfIterations
   end
   
   
-  boidPositions = boidPositions + boidVelocities;
+  boidPositions = boidPositions + deltaT.*boidVelocities;
   
-  pause(0.1)
+  pause(0.01)
   UpdatePlotBoids(posHandler, velHandler);
   
 end
