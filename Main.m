@@ -13,7 +13,7 @@ boidPositions = InitializePositions(numberOfBoids,maxPositions);
 boidVelocities = zeros(numberOfBoids,3);
 
 figure
-plot3(boidPositions(:,1),boidPositions(:,2),boidPositions(:,3),'*')
+PlotBoids(boidPositions);
 
 for i = 1:100
   for iBoid = 1:numberOfBoids
@@ -25,6 +25,6 @@ for i = 1:100
   
   boidPositions = boidPositions + boidVelocities;
   pause(0.1)
-  plot3(boidPositions(:,1),boidPositions(:,2),boidPositions(:,3),'*')
+  PlotBoids(boidPositions);
   
 end
