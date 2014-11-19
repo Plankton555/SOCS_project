@@ -3,12 +3,12 @@
 
 numberOfIterations = 2000;
 numberOfBoids = 100;
-deltaT = 0.1;
+deltaT = 0.5;
 
 % Parameters
 cohesionFactor = 0.01;
-alignmentFactor = 0.08;
-separationFactor = 0.05;
+alignmentFactor = 0.15;
+separationFactor = 0.01;
 separationRadius = 15;
 maxVelocity = 3;
 maxPositions = [100,100,100];
