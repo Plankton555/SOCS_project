@@ -32,6 +32,8 @@ separationVelocity = separationFactor * separationVelocity;
 boidVelocity = boidVelocities(iBoid,:) + cohesionVelocity + ...
   alignmentVelocity + separationVelocity;
 
+% TODO: Restrict maximum velocity
+
 
 end
 
