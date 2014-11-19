@@ -1,9 +1,9 @@
 
 clear all; close all; clc;
 
-numberOfIterations = 100;
+numberOfIterations = 200;
 numberOfBoids = 100;
-maxPositions = [50,50,50];
+maxPositions = [100,100,100];
 
 % Parameters
 cohesionFactor = 0.05;
