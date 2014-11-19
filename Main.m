@@ -6,11 +6,11 @@ numberOfBoids = 100;
 maxPositions = [50,50,50];
 
 % Parameters
-cohesionFactor = 0.01;
+cohesionFactor = 0.05;
 alignmentFactor = 0.125;
-separationFactor = 1;
-separationRadius = 1;
-maxVelocity = 5;
+separationFactor = 0.01;
+separationRadius = 10;
+maxVelocity = 1;
 % Putting all parameters in a vector to reduce nr of parameters into
 % functions. Remember that order is important here!
 paramVector = [cohesionFactor, alignmentFactor, separationFactor, ...
