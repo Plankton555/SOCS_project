@@ -1,12 +1,18 @@
 function boidVelocity = UpdateBoidVelocity(boidPositions, boidVelocities,...
-    iBoid, cohesionFactor, alignmentFactor, separationFactor, ...
-    separationRadius, maxVelocity)
+    iBoid, paramVector)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 [numberOfBoids, dimension] = size(boidPositions);
 cohesionVelocity = zeros(1,dimension);
 alignmentVelocity = zeros(1,dimension);
 separationVelocity = zeros(1,dimension);
+
+% Extract parameters from paramVector
+cohesionFactor = paramVector(1);
+alignmentFactor = paramVector(2);
+separationFactor = paramVector(3);
+separationRadius = paramVector(4);
+maxVelocity = paramVector(5);
 
 %Cohesion part
 centerOfMass = (sum(boidPositions) - boidPositions(iBoid,:))/ ...

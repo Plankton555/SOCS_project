@@ -4,16 +4,21 @@
 %model
 numberOfIterations = 100;
 numberOfBoids = 100;
+maxPositions = [50,50,50];
+
+% Parameters
 cohesionFactor = 0.01;
 alignmentFactor = 0.125;
 separationFactor = 1;
 separationRadius = 1;
-maxPositions = [50,50,50];
 maxVelocity = 5;
-% TODO: Maybe put all parameters in a vector to reduce nr of parameters
-% into functions?
+% Putting all parameters in a vector to reduce nr of parameters into
+% functions. Remember that order is important here!
+paramVector = [cohesionFactor, alignmentFactor, separationFactor, ...
+    separationRadius, maxVelocity];
 
-boidPositions = InitializePositions(numberOfBoids,maxPositions);
+% Initialise simulation
+boidPositions = InitializePositions(numberOfBoids, maxPositions);
 boidVelocities = zeros(numberOfBoids,3);
 
 figure;
@@ -23,8 +28,7 @@ for i = 1:numberOfIterations
   for iBoid = 1:numberOfBoids
     
     boidVelocities(iBoid,:) = UpdateBoidVelocity(boidPositions, ...
-        boidVelocities, iBoid,cohesionFactor,alignmentFactor, ...
-        separationFactor, separationRadius, maxVelocity);
+        boidVelocities, iBoid, paramVector);
     
   end
   
