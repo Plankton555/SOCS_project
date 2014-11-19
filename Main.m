@@ -23,18 +23,19 @@ boidVelocities = zeros(numberOfBoids,3);
 [plotHandler,velHandler] = PlotBoids(boidPositions,boidVelocities,maxPositions);
 %%
 for i = 1:numberOfIterations
-  for iBoid = 1:numberOfBoids
+    for iBoid = 1:numberOfBoids
+        
+        boidVelocities(iBoid,:) = UpdateBoidVelocity(boidPositions, ...
+            boidVelocities, iBoid, paramVector);
+        
+    end
     
-    boidVelocities(iBoid,:) = UpdateBoidVelocity(boidPositions, ...
-        boidVelocities, iBoid, paramVector);
+    boidPositions = boidPositions + boidVelocities;
+    [boidPositions, boidVelocities] = RestrictBoidsPosVel(boidPositions, ...
+        boidVelocities, maxPositions);
     
-  end
-  
-  boidPositions = boidPositions + boidVelocities;
-  [boidPositions, boidVelocities] = RestrictBoidsPosVel(boidPositions, ...
-      boidVelocities, maxPositions);
-
-  pause(0.1)
-  UpdatePlotBoids(plotHandler,velHandler);
-
+    pause(0.1)
+    UpdatePlotBoids(plotHandler,velHandler);
+    
+    
 end
