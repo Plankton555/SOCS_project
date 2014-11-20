@@ -1,7 +1,7 @@
+%Main file for SOCS project group 11 
+clear all; close all; clc;
 
-%clear all; close all; clc;
-
-numberOfIterations = 200;
+numberOfIterations = 2000;
 numberOfBoids = 100;
 deltaT = 0.5;
 
@@ -9,17 +9,17 @@ deltaT = 0.5;
 cohesionFactor = 0.01;
 alignmentFactor = 0.15;
 separationFactor = 0.01;
-separationRadius = 20;
+separationRadius = 30;
 maxVelocity = 3;
 maxPositions = [100,100,100];
 restrictionFactor = 0.1;
-visibilityRange = 30;
+visibilityRange = 20;
 
 % Putting all parameters in a vector to reduce nr of parameters into
 % functions. Remember that order is important here!
 paramVector = [cohesionFactor, alignmentFactor, separationFactor, ...
-    separationRadius, maxVelocity, maxPositions,restrictionFactor, ...
-    visibilityRange];
+  separationRadius, maxVelocity, maxPositions,restrictionFactor, ...
+  visibilityRange];
 
 % Initialise simulation
 boidPositions = InitializePositions(numberOfBoids, maxPositions);
@@ -29,15 +29,15 @@ boidVelocities = zeros(numberOfBoids,3);
 %%
 for i = 1:numberOfIterations
   
-  %working function but not included in updates
   visibilityMatrix = GetVisibility(boidPositions, visibilityRange);
   for iBoid = 1:numberOfBoids
     
+    visibleNeighbours = find(visibilityMatrix(iBoid,:));
     boidVelocities(iBoid,:) = UpdateBoidVelocity(boidPositions, ...
-      boidVelocities, iBoid, paramVector);
+      boidVelocities, paramVector,visibleNeighbours, iBoid);
     
   end
-    
+  
   boidPositions = boidPositions + deltaT.*boidVelocities;
   
   %pause(0.01)

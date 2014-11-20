@@ -2,7 +2,8 @@ function [posHandler,velHandler] = PlotBoids(boidPositions,boidVelocities,maxPos
 figHandler = figure();
 posHandler = plot3(boidPositions(:,1),boidPositions(:,2),boidPositions(:,3),'bo');
 hold on
-axis([0 maxPositions(1) 0 maxPositions(2) 0 maxPositions(3)])
+axis([-0.2*maxPositions(1) 1.2*maxPositions(1) -0.2*maxPositions(2) ...
+  1.2*maxPositions(2) -0.2*maxPositions(3) 1.2*maxPositions(3)])
 grid on
 
 velHandler = quiver3(boidPositions(:,1),boidPositions(:,2),...
