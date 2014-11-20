@@ -24,9 +24,9 @@ paramVector = [cohesionFactor, alignmentFactor, separationFactor, ...
 
 % Initialise simulation
 boidPositions = InitializePositions(numberOfBoids, maxPositions);
-boidVelocities = zeros(numberOfBoids,3);
+boidVelocities = InitializeVelocities(numberOfBoids);
 
-[posHandler,velHandler] = PlotBoids(boidPositions,boidVelocities,maxPositions);
+plotHandler = PlotBoids(boidPositions,boidVelocities,maxPositions);
 %%
 for i = 1:numberOfIterations
   
@@ -42,7 +42,7 @@ for i = 1:numberOfIterations
   boidPositions = boidPositions + deltaT.*boidVelocities;
   
   %pause(0.01)
-  UpdatePlotBoids(posHandler, velHandler);
+  UpdatePlotBoids(plotHandler);
   drawnow;
   
 end

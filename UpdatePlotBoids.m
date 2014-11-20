@@ -1,5 +1,4 @@
-function UpdatePlotBoids(plotHandler,velHandler)
-refreshdata(plotHandler)
-refreshdata(velHandler)
+function UpdatePlotBoids(handler)
+refreshdata(handler)
 end
 
