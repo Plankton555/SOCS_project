@@ -17,7 +17,6 @@ restrictionVelocities = zeros(1,3);
       restrictionVelocities(k) = -differensVector(k)*restrictionFactor;
     end 
     
-
 end
 
 

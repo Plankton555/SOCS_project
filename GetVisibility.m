@@ -6,8 +6,6 @@ function visibilityMatrix = GetVisibility(boidPositions, visibilityRange)
   visibilityMatrix = zeros(numberOfBoids,numberOfBoids);
   for i = 1:numberOfBoids
     for j = i+1:numberOfBoids
-
-%       distance = sqrt(sum((boidPositions(i,:) - boidPositions(j,:)).^2));
       distance = norm(boidPositions(i,:) - boidPositions(j,:));
 
       if(distance < visibilityRange)

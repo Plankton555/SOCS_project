@@ -24,12 +24,12 @@ function boidVelocity = UpdateBoidVelocity(boidPositions, boidVelocities,...
       numberOfBoids);
     
     %Alignment part
-    v2 = RuleAlignment(boidVelocities, visibleNeighbours, iBoid, ...
+    v2 = RuleAlignment(boidVelocities, visibleNeighbours, ...
       alignmentFactor, numberOfBoids);
     
     %Separation part
     v3 = RuleSeparation(boidPositions, visibleNeighbours, iBoid,...
-      separationFactor, separationRadius, numberOfBoids, dimension);
+      separationFactor, separationRadius, dimension);
     
   end
   %Keep them in a region

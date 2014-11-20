@@ -1,5 +1,6 @@
 %Main file for SOCS project group 11 
-clear all; close all; clc;
+%clear all; 
+close all; clc;
 
 numberOfIterations = 2000;
 numberOfBoids = 100;

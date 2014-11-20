@@ -1,9 +1,8 @@
 function alignmentVelocity = RuleAlignment(boidVelocities, ...
-  visibleNeighbours, iBoid, alignmentFactor, numberOfBoids)
-%UNTITLED4 Summary of this function goes here
-%   Detailed explanation goes here
+  visibleNeighbours, alignmentFactor, numberOfBoids)
+%RuleAlignment Summary of this function goes here
 
-centerOfVelocity = (sum(boidVelocities(visibleNeighbours,:)))/...
+centerOfVelocity = (sum(boidVelocities(visibleNeighbours,:),1))/...
   (numberOfBoids);
 alignmentVelocity = alignmentFactor * centerOfVelocity;
 
