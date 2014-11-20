@@ -1,5 +1,5 @@
 %Main file for SOCS project group 11 
-%clear all; 
+clear all; 
 close all; clc;
 
 numberOfIterations = 2000;
