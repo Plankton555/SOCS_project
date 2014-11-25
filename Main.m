@@ -9,7 +9,7 @@ deltaT = 0.5;
 
 % Parameters
 cohesionFactor = 0.01;
-alignmentFactor = 0.15;
+alignmentFactor = 0.18;
 separationFactor = 0.01;
 separationRadius = 30;
 maxVelocityBoid = 3;
@@ -17,14 +17,15 @@ maxVelocityPred = 2;
 maxPositions = [100,100,100];
 restrictionFactor = 0.1;
 huntingFactor = 0.2;
-visibilityRange = 20;
+avoidPredFactor = 2;
+visibilityRange = 30;
 pCrazy = 0.01;
 
 % Putting all parameters in a vector to reduce nr of parameters into
 % functions. Remember that order is important here!
 paramVector = [cohesionFactor, alignmentFactor, separationFactor, ...
   separationRadius, maxVelocityBoid, maxPositions,restrictionFactor, ...
-  visibilityRange, huntingFactor, maxVelocityPred];
+  visibilityRange, huntingFactor, maxVelocityPred, avoidPredFactor];
 
 % Initialise simulation
 boidPositions = InitializePositions(numberOfBoids, maxPositions);
@@ -41,7 +42,7 @@ for i = 1:numberOfIterations
     
     visibleNeighbours = find(visibilityMatrix(iBoid,:));
     boidVelocities(iBoid,:) = UpdateBoidVelocity(boidPositions, ...
-      boidVelocities, paramVector,visibleNeighbours, iBoid);
+      boidVelocities, predPositions, paramVector,visibleNeighbours, iBoid);
     
   end
   for iPred = 1:numberOfPreds

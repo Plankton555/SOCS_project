@@ -1,5 +1,5 @@
 function boidVelocity = UpdateBoidVelocity(boidPositions, boidVelocities,...
-    paramVector,visibleNeighbours, iBoid)
+    predPositions, paramVector,visibleNeighbours, iBoid)
   %UpdateBoidVelocity Function to update the velocities of the boids
   
   numberOfBoids = length(visibleNeighbours);
@@ -17,6 +17,7 @@ function boidVelocity = UpdateBoidVelocity(boidPositions, boidVelocities,...
   maxVelocity = paramVector(5);
   maxPos = paramVector(6:8);
   restrictionFactor = paramVector(9);
+  avoidPredFactor = paramVector(13);
   
   if any(visibleNeighbours)
     %Cohesion part
@@ -35,8 +36,13 @@ function boidVelocity = UpdateBoidVelocity(boidPositions, boidVelocities,...
   %Keep them in a region
   v4 = RuleRestrictedRegion(boidPositions, maxPos,iBoid, ...
     restrictionFactor);
+
+  %Avoid predators
+  % Can see all predators atm
+  visiblePredators = 1:size(predPositions,1);
+  v5 = RuleAvoidPreds(predPositions, visiblePredators, boidPositions(iBoid,:), avoidPredFactor, dimension);
   
-  boidVelocity = boidVelocities(iBoid,:) + v1 + v2 + v3 + v4;
+  boidVelocity = boidVelocities(iBoid,:) + v1 + v2 + v3 + v4 + v5;
   
   % Restrict maximum velocity
   n = norm(boidVelocity);
