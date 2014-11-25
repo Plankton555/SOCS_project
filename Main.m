@@ -16,6 +16,7 @@ maxVelocityBoid = 3;
 maxVelocityPred = 4;
 maxPositions = [100,100,100];
 restrictionFactor = 0.1;
+huntingFactor = 1;
 visibilityRange = 20;
 pCrazy = 0.01;
 
@@ -23,7 +24,7 @@ pCrazy = 0.01;
 % functions. Remember that order is important here!
 paramVector = [cohesionFactor, alignmentFactor, separationFactor, ...
   separationRadius, maxVelocityBoid, maxPositions,restrictionFactor, ...
-  visibilityRange];
+  visibilityRange, huntingFactor, maxVelocityPred];
 
 % Initialise simulation
 boidPositions = InitializePositions(numberOfBoids, maxPositions);
@@ -43,8 +44,13 @@ for i = 1:numberOfIterations
       boidVelocities, paramVector,visibleNeighbours, iBoid);
     
   end
+  for iPred = 1:numberOfPreds
+      predVelocities(iPred,:) = UpdatePredVelocity(predPositions, ...
+          predVelocities, boidPositions, iPred, paramVector);
+  end
   boidVelocities = CrazyBoid(boidVelocities,pCrazy,maxVelocityBoid);
   boidPositions = boidPositions + deltaT.*boidVelocities;
+  predPositions = predPositions + deltaT.*predVelocities;
   
   %pause(0.01)
   UpdatePlotBoids(plotHandler);
