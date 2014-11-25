@@ -32,7 +32,7 @@ boidVelocities = InitializeVelocities(numberOfBoids, maxVelocityBoid);
 predPositions = InitializePositions(numberOfPreds, maxPositions);
 predVelocities = InitializeVelocities(numberOfPreds, maxVelocityPred);
 
-plotHandler = PlotBoids(boidPositions,boidVelocities,maxPositions);
+[plotBoidHandler, plotPredHandler] = PlotBoidsNPreds(boidPositions,boidVelocities,predPositions,predVelocities,maxPositions);
 %%
 for i = 1:numberOfIterations
   
@@ -53,7 +53,7 @@ for i = 1:numberOfIterations
   predPositions = predPositions + deltaT.*predVelocities;
   
   %pause(0.01)
-  UpdatePlotBoids(plotHandler);
+  UpdatePlotBoidsNPreds(plotBoidHandler, plotPredHandler);
   drawnow;
   
 end
