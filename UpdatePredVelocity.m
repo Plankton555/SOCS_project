@@ -2,13 +2,6 @@ function predVelocity = UpdatePredVelocity(predPositions, predVelocities,...
     boidPositions, iPred, paramVector)
     %UpdatePredVelocity Function to update the velocities of the predators
 
-    numberOfBoids = length(boidPositions);
-    [~, dimension] = size(predPositions);
-    v1 = zeros(1,dimension);
-    v2 = zeros(1,dimension);
-    v3 = zeros(1,dimension);
-
-
     % Extract parameters from paramVector
     maxPos = paramVector(6:8);
     restrictionFactor = paramVector(9);
@@ -17,11 +10,13 @@ function predVelocity = UpdatePredVelocity(predPositions, predVelocities,...
 
 
     %Cohesion part
-    v1 = RuleHuntBoids(predVelocities, boidPositions, iPred, huntingFactor);
+    v1 = RuleHuntBoids(predPositions, boidPositions, iPred, huntingFactor);
+    fprintf('huntingVelocity: (%.4f, %.4f, %.4f) \n', v1(1), v1(2), v1(3));
 
     %Keep them in a region
     v2 = RuleRestrictedRegion(predPositions, maxPos,iPred, ...
         restrictionFactor);
+    fprintf('restrictionVelocity: (%.4f, %.4f, %.4f) \n\n', v2(1), v2(2), v2(3));
 
     predVelocity = predVelocities(iPred,:) + v1 + v2;
 

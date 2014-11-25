@@ -13,10 +13,10 @@ alignmentFactor = 0.15;
 separationFactor = 0.01;
 separationRadius = 30;
 maxVelocityBoid = 3;
-maxVelocityPred = 4;
+maxVelocityPred = 2;
 maxPositions = [100,100,100];
 restrictionFactor = 0.1;
-huntingFactor = 1;
+huntingFactor = 0.2;
 visibilityRange = 20;
 pCrazy = 0.01;
 
