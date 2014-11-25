@@ -4,6 +4,7 @@ close all; clc;
 
 numberOfIterations = 2000;
 numberOfBoids = 100;
+numberOfPreds = 1;
 deltaT = 0.5;
 
 % Parameters
@@ -11,7 +12,8 @@ cohesionFactor = 0.01;
 alignmentFactor = 0.15;
 separationFactor = 0.01;
 separationRadius = 30;
-maxVelocity = 3;
+maxVelocityBoid = 3;
+maxVelocityPred = 4;
 maxPositions = [100,100,100];
 restrictionFactor = 0.1;
 visibilityRange = 20;
@@ -20,12 +22,14 @@ pCrazy = 0.01;
 % Putting all parameters in a vector to reduce nr of parameters into
 % functions. Remember that order is important here!
 paramVector = [cohesionFactor, alignmentFactor, separationFactor, ...
-  separationRadius, maxVelocity, maxPositions,restrictionFactor, ...
+  separationRadius, maxVelocityBoid, maxPositions,restrictionFactor, ...
   visibilityRange];
 
 % Initialise simulation
 boidPositions = InitializePositions(numberOfBoids, maxPositions);
-boidVelocities = InitializeVelocities(numberOfBoids,maxVelocity);
+boidVelocities = InitializeVelocities(numberOfBoids, maxVelocityBoid);
+predPositions = InitializePositions(numberOfPreds, maxPositions);
+predVelocities = InitializeVelocities(numberOfPreds, maxVelocityPred);
 
 plotHandler = PlotBoids(boidPositions,boidVelocities,maxPositions);
 %%
@@ -39,7 +43,7 @@ for i = 1:numberOfIterations
       boidVelocities, paramVector,visibleNeighbours, iBoid);
     
   end
-  boidVelocities = CrazyBoid(boidVelocities,pCrazy,maxVelocity);
+  boidVelocities = CrazyBoid(boidVelocities,pCrazy,maxVelocityBoid);
   boidPositions = boidPositions + deltaT.*boidVelocities;
   
   %pause(0.01)
