@@ -9,16 +9,16 @@ deltaT = 0.5;
 
 % Parameters
 cohesionFactor = 0.01;
-alignmentFactor = 0.18;
-separationFactor = 0.01;
+alignmentFactor = 0.15;
+separationFactor = 0.02;
 separationRadius = 30;
 maxVelocityBoid = 3;
-maxVelocityPred = 2;
+maxVelocityPred = 4;
 maxPositions = [100,100,100];
-restrictionFactor = 0.1;
-huntingFactor = 0.2;
-avoidPredFactor = 2;
-visibilityRange = 30;
+restrictionFactor = 0.05;
+huntingFactor = 0.3;
+avoidPredFactor = 3;
+visibilityRange = 40;
 pCrazy = 0.01;
 
 % Putting all parameters in a vector to reduce nr of parameters into

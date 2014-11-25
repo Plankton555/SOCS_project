@@ -6,7 +6,7 @@ avoidPredVelocity = zeros(1,dimension);
 
 for jPred = visiblePredators
     differVector = (predPositions(jPred,:) - iBoidPosition);
-    avoidPredVelocity = avoidPredVelocity - 1./(differVector+0.2);
+    avoidPredVelocity = avoidPredVelocity - 1./(differVector+0.1);
     %BEWARE OF MAGICAL NUMBERS!
 end
 avoidPredVelocity = avoidPredFactor * avoidPredVelocity;
