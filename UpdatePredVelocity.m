@@ -1,4 +1,4 @@
-function predVelocity = UpdatePredVelocity(predPositions, predVelocities,...
+function [predVelocity,targetPreyIndex] = UpdatePredVelocity(predPositions, predVelocities,...
     boidPositions, iPred, paramVector)
     %UpdatePredVelocity Function to update the velocities of the predators
 
@@ -10,7 +10,7 @@ function predVelocity = UpdatePredVelocity(predPositions, predVelocities,...
 
 
     %Cohesion part
-    v1 = RuleHuntBoids(predPositions, boidPositions, iPred, huntingFactor);
+    [v1,targetPreyIndex] = RuleHuntBoids(predPositions, boidPositions, iPred, huntingFactor);
 
     %Keep them in a region
     v2 = RuleRestrictedRegion(predPositions, maxPos,iPred, ...
