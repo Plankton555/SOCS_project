@@ -4,7 +4,7 @@ function [boidPositions, boidVelocities] = CheckPredsVSPrey(boidPositions, ...
 %   Detailed explanation goes here
   numberOfPreds = size(predPositions,1);
 
-  for iPred = 
+%   for iPred = 
 
 end
 
