@@ -1,6 +1,7 @@
 %Main file for SOCS project group 11 
 clear all; 
 close all; clc;
+tic();
 
 numberOfIterations = 2000;
 numberOfBoids = 100;
@@ -36,7 +37,7 @@ predVelocities = InitializeVelocities(numberOfPreds, maxVelocityPred);
 [plotBoidHandler, plotPredHandler] = PlotBoidsNPreds(boidPositions,boidVelocities,predPositions,predVelocities,maxPositions);
 %%
 for i = 1:numberOfIterations
-  
+  fprintf('Iteration: %i\n', i);
   visibilityMatrix = GetVisibility(boidPositions, visibilityRange);
   for iBoid = 1:numberOfBoids
     
@@ -58,3 +59,5 @@ for i = 1:numberOfIterations
   drawnow;
   
 end
+
+toc();
