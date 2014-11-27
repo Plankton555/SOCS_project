@@ -47,7 +47,7 @@ for i = 1:numberOfIterations
     
   end
   for iPred = 1:numberOfPreds
-      predVelocities(iPred,:) = UpdatePredVelocity(predPositions, ...
+      [predVelocities(iPred,:),targetIndex(i,iPred)] = UpdatePredVelocity(predPositions, ...
           predVelocities, boidPositions, iPred, paramVector);
   end
   boidVelocities = CrazyBoid(boidVelocities,pCrazy,maxVelocityBoid);
