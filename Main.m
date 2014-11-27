@@ -8,7 +8,7 @@ numberOfBoids = 100;
 numberOfPreds = 1;
 deltaT = 0.5;
 
-doPlot = 0;
+doPlot = 1;
 doDataGathering = 1;
 
 % Parameters
