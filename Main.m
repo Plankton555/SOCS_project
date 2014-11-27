@@ -3,10 +3,13 @@ clear all;
 close all; clc;
 tic();
 
-numberOfIterations = 2000;
+numberOfIterations = 200;
 numberOfBoids = 100;
 numberOfPreds = 1;
 deltaT = 0.5;
+
+doPlot = 0;
+doDataGathering = 1;
 
 % Parameters
 cohesionFactor = 0.01;
@@ -34,7 +37,14 @@ boidVelocities = InitializeVelocities(numberOfBoids, maxVelocityBoid);
 predPositions = InitializePositions(numberOfPreds, maxPositions);
 predVelocities = InitializeVelocities(numberOfPreds, maxVelocityPred);
 
-[plotBoidHandler, plotPredHandler] = PlotBoidsNPreds(boidPositions,boidVelocities,predPositions,predVelocities,maxPositions);
+if doPlot
+    [plotBoidHandler, plotPredHandler] = PlotBoidsNPreds(boidPositions,boidVelocities,predPositions,predVelocities,maxPositions);
+end
+if doDataGathering
+    time = (1:numberOfIterations)'*deltaT;
+    dataMeanVelocity = zeros(numberOfIterations, size(boidVelocities,2));
+end
+
 %%
 for i = 1:numberOfIterations
   fprintf('Iteration: %i\n', i);
@@ -55,9 +65,19 @@ for i = 1:numberOfIterations
   predPositions = predPositions + deltaT.*predVelocities;
   
   %pause(0.01)
-  UpdatePlotBoidsNPreds(plotBoidHandler, plotPredHandler);
-  drawnow;
+  if doPlot
+      UpdatePlotBoidsNPreds(plotBoidHandler, plotPredHandler);
+      drawnow;
+  end
+  if doDataGathering
+      dataMeanVelocity(i,:) = mean(boidVelocities);
+  end
   
 end
 
+if doDataGathering
+    figure;
+    plot(time, dataMeanVelocity);
+    legend('velocity (x axis)', 'velocity (y axis)', 'velocity (z axis)');
+end
 toc();
