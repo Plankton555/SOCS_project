@@ -26,6 +26,8 @@ visibilityRange = 40;
 pCrazy = 0.01;
 huntRadius = 5;
 
+nrDimens = numel(maxPositions);
+
 % Putting all parameters in a vector to reduce nr of parameters into
 % functions. Remember that order is important here!
 paramVector = [cohesionFactor, alignmentFactor, separationFactor, ...
@@ -43,7 +45,7 @@ if doPlot
 end
 if doDataGathering
     time = (1:numberOfIterations)'*deltaT;
-    dataMeanVelocity = zeros(numberOfIterations, size(boidVelocities,2));
+    dataMeanVelocity = zeros(numberOfIterations, nrDimens+1);
 end
 
 %%
@@ -75,14 +77,12 @@ for i = 1:numberOfIterations
       drawnow;
   end
   if doDataGathering
-      dataMeanVelocity(i,:) = mean(boidVelocities);
+      dataMeanVelocity(i,:) = DataGatherVelocity(boidVelocities);
   end
   
 end
 
 if doDataGathering
-    figure;
-    plot(time, dataMeanVelocity);
-    legend('velocity (x axis)', 'velocity (y axis)', 'velocity (z axis)');
+    PlotBoidVelocity(time, dataMeanVelocity);
 end
 toc();
