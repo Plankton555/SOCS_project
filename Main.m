@@ -24,6 +24,7 @@ huntingFactor = 0.3;
 avoidPredFactor = 3;
 visibilityRange = 40;
 pCrazy = 0.01;
+huntRadius = 5;
 
 % Putting all parameters in a vector to reduce nr of parameters into
 % functions. Remember that order is important here!
@@ -57,12 +58,16 @@ for i = 1:numberOfIterations
     
   end
   for iPred = 1:numberOfPreds
-      predVelocities(iPred,:) = UpdatePredVelocity(predPositions, ...
+      [predVelocities(iPred,:),targetIndex(i,iPred)] = UpdatePredVelocity(predPositions, ...
           predVelocities, boidPositions, iPred, paramVector);
   end
   boidVelocities = CrazyBoid(boidVelocities,pCrazy,maxVelocityBoid);
   boidPositions = boidPositions + deltaT.*boidVelocities;
   predPositions = predPositions + deltaT.*predVelocities;
+  
+  [boidPositions, boidVelocities] = CheckPredsVSPrey(boidPositions, ...
+    boidVelocities, predPositions,targetIndex ,huntRadius, i);
+  
   
   %pause(0.01)
   if doPlot
