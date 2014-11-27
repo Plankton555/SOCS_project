@@ -51,7 +51,7 @@ end
 %%
 for i = 1:numberOfIterations
   fprintf('Iteration: %i\n', i);
-  visibilityMatrix = GetVisibility(boidPositions, visibilityRange);
+  visibilityMatrix = GetVisibility(boidPositions, predPositions, visibilityRange);
   for iBoid = 1:numberOfBoids
     
     visibleNeighbours = find(visibilityMatrix(iBoid,:));
