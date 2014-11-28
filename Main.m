@@ -3,7 +3,7 @@ clear all;
 close all; clc;
 tic();
 
-numberOfIterations = 2000;
+numberOfIterations = 200;
 numberOfBoids = 100;
 numberOfPreds = 1;
 deltaT = 0.5;
@@ -21,7 +21,7 @@ huntingFactor = 0.3;
 avoidPredFactor = 3;
 visibilityRange = 40;
 pCrazy = 0.01;
-huntRadius = 5;
+huntRadius = 20;
 
 % Putting all parameters in a vector to reduce nr of parameters into
 % functions. Remember that order is important here!
@@ -40,6 +40,7 @@ predVelocities = InitializeVelocities(numberOfPreds, maxVelocityPred);
 for i = 1:numberOfIterations
   fprintf('Iteration: %i\n', i);
   visibilityMatrix = GetVisibility(boidPositions, visibilityRange);
+  numberOfBoids = size(boidPositions,1);
   for iBoid = 1:numberOfBoids
     
     visibleNeighbours = find(visibilityMatrix(iBoid,:));
