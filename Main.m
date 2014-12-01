@@ -8,6 +8,9 @@ numberOfBoids = 100;
 numberOfPreds = 1;
 deltaT = 0.5;
 
+doPlot = 1;
+doDataGathering = 1;
+
 % Parameters
 cohesionFactor = 0.01;
 alignmentFactor = 0.15;
@@ -23,6 +26,8 @@ visibilityRange = 40;
 pCrazy = 0.01;
 huntRadius = 5;
 
+nrDimens = numel(maxPositions);
+
 % Putting all parameters in a vector to reduce nr of parameters into
 % functions. Remember that order is important here!
 paramVector = [cohesionFactor, alignmentFactor, separationFactor, ...
@@ -35,15 +40,22 @@ boidVelocities = InitializeVelocities(numberOfBoids, maxVelocityBoid);
 predPositions = InitializePositions(numberOfPreds, maxPositions);
 predVelocities = InitializeVelocities(numberOfPreds, maxVelocityPred);
 
-[plotBoidHandler, plotPredHandler] = PlotBoidsNPreds(boidPositions,...
-  boidVelocities,predPositions,predVelocities,maxPositions);
+if doPlot
+    [plotBoidHandler, plotPredHandler] = PlotBoidsNPreds(boidPositions,boidVelocities,predPositions,predVelocities,maxPositions);
+end
+if doDataGathering
+    time = (1:numberOfIterations)'*deltaT;
+    dataMeanVelocity = zeros(numberOfIterations, nrDimens+1);
+end
+
 %%
 for i = 1:numberOfIterations
   fprintf('Iteration: %i\n', i);
-  visibilityMatrix = GetVisibility(boidPositions,visibilityRange);
-%   visibilityMatrix = GetVisibilityWrapAround(boidPositions,maxPositions,...
+  visibilityMatrix = GetVisibility(boidPositions, predPositions, visibilityRange);
+  %   visibilityMatrix = GetVisibilityWrapAround(boidPositions,maxPositions,...
 %     visibilityRange);
-  numberOfBoids = size(boidPositions,1);
+  
+
   for iBoid = 1:numberOfBoids
     
     visibleNeighbours = find(visibilityMatrix(iBoid,:));
@@ -72,9 +84,17 @@ for i = 1:numberOfIterations
   
   
   %pause(0.01)
-  UpdatePlotBoidsNPreds(plotBoidHandler, plotPredHandler);
-  drawnow;
+  if doPlot
+      UpdatePlotBoidsNPreds(plotBoidHandler, plotPredHandler);
+      drawnow;
+  end
+  if doDataGathering
+      dataMeanVelocity(i,:) = DataGatherVelocity(boidVelocities);
+  end
   
 end
 
+if doDataGathering
+    PlotBoidVelocity(time, dataMeanVelocity);
+end
 toc();
