@@ -45,7 +45,7 @@ function boidVelocity = UpdateBoidVelocityWrapAround(boidPositions, boidVelociti
   %Avoid predators
   % Can see all predators atm
   visiblePredators = 1:size(predPositions,1);
-  v5 = RuleAvoidPreds(predPositions, visiblePredators,...
+  v5 = RuleAvoidPredsWrapAround(predPositions, visiblePredators,...
     boidPositions(iBoid,:), avoidPredFactor, dimension);
   
   boidVelocity = boidVelocities(iBoid,:) + v1 + v2 + v3 + v4 + v5;

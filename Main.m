@@ -3,8 +3,8 @@
 close all; clc;
 tic();
 
-numberOfIterations = 100;
-numberOfBoids = 50;
+numberOfIterations = 500;
+numberOfBoids = 40;
 numberOfPreds = 1;
 deltaT = 0.5;
 
@@ -47,26 +47,26 @@ if doDataGathering
     time = (1:numberOfIterations)'*deltaT;
     dataMeanVelocity = zeros(numberOfIterations, nrDimens+1);
     dataMeanSeparation = zeros(numberOfIterations,1);
+    dataPopulationSize = zeros(numberOfIterations,1);
 end
 
 %%
 for i = 1:numberOfIterations
-  fprintf('Iteration: %i\n', i);
-  visibilityMatrix = GetVisibility(boidPositions, predPositions, visibilityRange);
-  %   visibilityMatrix = GetVisibilityWrapAround(boidPositions,maxPositions,...
-%     visibilityRange);
+  fprintf('Iteration: %i \t Time: %.2f\n', i, i*deltaT);
+  [visibilityMatrix, dataMeanSeparation(i)] = GetVisibilityWrapAround(boidPositions,maxPositions,...
+    visibilityRange);
   
 
   for iBoid = 1:numberOfBoids
     
-    visibleNeighbours = find(visibilityMatrix(iBoid,:));
-    boidVelocities(iBoid,:) = UpdateBoidVelocity(boidPositions, boidVelocities,...
-    predPositions, paramVector,visibleNeighbours, iBoid);
+%     visibleNeighbours = find(visibilityMatrix(iBoid,:));
+%     boidVelocities(iBoid,:) = UpdateBoidVelocity(boidPositions, boidVelocities,...
+%     predPositions, paramVector,visibleNeighbours, iBoid);
 
-%     visibleNeighbours = find(visibilityMatrix(iBoid,:,1));
-%     boidVelocities(iBoid,:) = UpdateBoidVelocityWrapAround(boidPositions, ...
-%       boidVelocities, predPositions,visibilityMatrix(iBoid,:,2:4), ...
-%       paramVector,visibleNeighbours, iBoid);
+    visibleNeighbours = find(visibilityMatrix(iBoid,:,1));
+    boidVelocities(iBoid,:) = UpdateBoidVelocityWrapAround(boidPositions, ...
+      boidVelocities, predPositions,visibilityMatrix(iBoid,:,2:4), ...
+      paramVector,visibleNeighbours, iBoid);
     
   end
   for iPred = 1:numberOfPreds
@@ -74,11 +74,11 @@ for i = 1:numberOfIterations
           predVelocities, boidPositions, iPred, paramVector);
   end
   boidVelocities = CrazyBoid(boidVelocities,pCrazy,maxVelocityBoid);
-  boidPositions = boidPositions + deltaT.*boidVelocities;
-  predPositions = predPositions + deltaT.*predVelocities;
+%   boidPositions = boidPositions + deltaT.*boidVelocities;
+%   predPositions = predPositions + deltaT.*predVelocities;
   
-%    boidPositions = mod(boidPositions + deltaT.*boidVelocities,maxPositions(1));
-%   predPositions = mod(predPositions + deltaT.*predVelocities,maxPositions(1));
+  boidPositions = mod(boidPositions + deltaT.*boidVelocities,maxPositions(1));
+  predPositions = mod(predPositions + deltaT.*predVelocities,maxPositions(1));
   
   [boidPositions, boidVelocities] = CheckPredsVSPrey(boidPositions, ...
     boidVelocities, predPositions,targetIndex ,huntRadius, i);
@@ -91,7 +91,8 @@ for i = 1:numberOfIterations
   end
   if doDataGathering
       dataMeanVelocity(i,:) = DataGatherVelocity(boidVelocities);
-      dataMeanSeparation(i) = DataGatherSeparation(boidPositions);
+      %dataMeanSeparation(i) = DataGatherSeparation(boidPositions);
+      dataPopulationSize(i) = DataGatherPopulationSize(boidPositions);
   end
   
 end
@@ -99,5 +100,6 @@ end
 if doDataGathering
     PlotBoidVelocity(time, dataMeanVelocity);
     PlotBoidSeparationDistance(time, dataMeanSeparation);
+    PlotBoidPopulationSize(time, dataPopulationSize);
 end
 toc();
