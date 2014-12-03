@@ -5,13 +5,23 @@ boidHandler = quiver3(boidPositions(:,1),boidPositions(:,2),...
 hold on
 predHandler = quiver3(predPositions(:,1),predPositions(:,2),...
   predPositions(:,3),predVelocities(:,1),predVelocities(:,2),predVelocities(:,3),'ro','Autoscale','off');
-axis([-0.2*maxPositions(1) 1.2*maxPositions(1) -0.2*maxPositions(2) ...
-  1.2*maxPositions(2) -0.2*maxPositions(3) 1.2*maxPositions(3)])
+% boidHandler = plot3(boidPositions(:,1),boidPositions(:,2),...
+%   boidPositions(:,3),'*');
+% hold on
+% predHandler = plot3(predPositions(:,1),predPositions(:,2),...
+%   predPositions(:,3),'*r');
+
+
+
+% axis([-0.2*maxPositions(1) 1.2*maxPositions(1) -0.2*maxPositions(2) ...
+%   1.2*maxPositions(2) -0.2*maxPositions(3) 1.2*maxPositions(3)])
+axis([0 maxPositions(1) 0 ...
+  maxPositions(2) 0 maxPositions(3)])
 grid on
 
-
+% 
 set(figHandler,'DoubleBuffer','on')
-
+% % 
 set(boidHandler,'XDataSource','boidPositions(:,1)')
 set(boidHandler,'YDataSource','boidPositions(:,2)')
 set(boidHandler,'ZDataSource','boidPositions(:,3)')

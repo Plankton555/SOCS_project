@@ -1,5 +1,5 @@
-function boidVelocity = UpdateBoidVelocity(boidPositions, boidVelocities,...
-    predPositions, paramVector,visibleNeighbours, iBoid)
+function boidVelocity = UpdateBoidVelocityWrapAround(boidPositions, boidVelocities,...
+    predPositions,distFactors ,paramVector,visibleNeighbours, iBoid)
   %UpdateBoidVelocity Function to update the velocities of the boids
   
   numberOfBoids = length(visibleNeighbours);
@@ -22,26 +22,31 @@ function boidVelocity = UpdateBoidVelocity(boidPositions, boidVelocities,...
   
   if any(visibleNeighbours)
     %Cohesion part
-    v1 = RuleCohesion(boidPositions, visibleNeighbours, iBoid, cohesionFactor, ...
-      numberOfBoids);
+    %     v1 = RuleCohesion(boidPositions, visibleNeighbours, iBoid, cohesionFactor, ...
+    %       numberOfBoids);
+    
+    v1 = RuleCohesionWrapAround(boidPositions, visibleNeighbours, distFactors,maxPos, ...
+      iBoid, cohesionFactor, numberOfBoids);
     
     %Alignment part
     v2 = RuleAlignment(boidVelocities, visibleNeighbours, ...
       alignmentFactor, numberOfBoids);
     
     %Separation part
-    v3 = RuleSeparation(boidPositions, visibleNeighbours, iBoid,...
+    v3 = RuleSeparationWrapAround(boidPositions, visibleNeighbours,...
+      distFactors, maxPos,iBoid,...
       separationFactor, separationRadius, dimension);
     
   end
-  %Keep them in a region
-  v4 = RuleRestrictedRegion(boidPositions, maxPos,iBoid, ...
-    restrictionFactor);
-
+  %   %Keep them in a region
+  %   v4 = RuleRestrictedRegion(boidPositions, maxPos,iBoid, ...
+  %     restrictionFactor);
+  
   %Avoid predators
   % Can see all predators atm
   visiblePredators = 1:size(predPositions,1);
-  v5 = RuleAvoidPreds(predPositions, visiblePredators, boidPositions(iBoid,:), avoidPredFactor, dimension);
+  v5 = RuleAvoidPreds(predPositions, visiblePredators,...
+    boidPositions(iBoid,:), avoidPredFactor, dimension);
   
   boidVelocity = boidVelocities(iBoid,:) + v1 + v2 + v3 + v4 + v5;
   

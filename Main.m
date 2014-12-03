@@ -1,5 +1,5 @@
 %Main file for SOCS project group 11 
-clear all; 
+% clear all; 
 close all; clc;
 tic();
 
@@ -18,7 +18,7 @@ separationFactor = 0.02;
 separationRadius = 30;
 maxVelocityBoid = 3;
 maxVelocityPred = 4;
-maxPositions = [100,100,100];
+maxPositions = [150,150,150];
 restrictionFactor = 0.05;
 huntingFactor = 0.3;
 avoidPredFactor = 3;
@@ -52,12 +52,21 @@ end
 %%
 for i = 1:numberOfIterations
   fprintf('Iteration: %i\n', i);
-  visibilityMatrix = GetVisibility(boidPositions, visibilityRange);
+  visibilityMatrix = GetVisibility(boidPositions, predPositions, visibilityRange);
+  %   visibilityMatrix = GetVisibilityWrapAround(boidPositions,maxPositions,...
+%     visibilityRange);
+  
+
   for iBoid = 1:numberOfBoids
     
     visibleNeighbours = find(visibilityMatrix(iBoid,:));
-    boidVelocities(iBoid,:) = UpdateBoidVelocity(boidPositions, ...
-      boidVelocities, predPositions, paramVector,visibleNeighbours, iBoid);
+    boidVelocities(iBoid,:) = UpdateBoidVelocity(boidPositions, boidVelocities,...
+    predPositions, paramVector,visibleNeighbours, iBoid);
+
+%     visibleNeighbours = find(visibilityMatrix(iBoid,:,1));
+%     boidVelocities(iBoid,:) = UpdateBoidVelocityWrapAround(boidPositions, ...
+%       boidVelocities, predPositions,visibilityMatrix(iBoid,:,2:4), ...
+%       paramVector,visibleNeighbours, iBoid);
     
   end
   for iPred = 1:numberOfPreds
@@ -67,6 +76,9 @@ for i = 1:numberOfIterations
   boidVelocities = CrazyBoid(boidVelocities,pCrazy,maxVelocityBoid);
   boidPositions = boidPositions + deltaT.*boidVelocities;
   predPositions = predPositions + deltaT.*predVelocities;
+  
+%    boidPositions = mod(boidPositions + deltaT.*boidVelocities,maxPositions(1));
+%   predPositions = mod(predPositions + deltaT.*predVelocities,maxPositions(1));
   
   [boidPositions, boidVelocities] = CheckPredsVSPrey(boidPositions, ...
     boidVelocities, predPositions,targetIndex ,huntRadius, i);
