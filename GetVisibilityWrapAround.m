@@ -1,4 +1,4 @@
-function visibilityMatrix = GetVisibilityWrapAround(boidPositions, ...
+function [visibilityMatrix, meanSeparation] = GetVisibilityWrapAround(boidPositions, ...
   maxPositions,visibilityRange)
 %getVisibility Returns a n x n matrix with which visible for all boids.
 %With the visible neigbours as 1 in the row vector for each boid. 
@@ -6,6 +6,9 @@ function visibilityMatrix = GetVisibilityWrapAround(boidPositions, ...
   [numberOfBoids,~] = size(boidPositions);
 %   visibilityMatrix = ones(numberOfBoids,numberOfBoids);
   visibilityMatrix = zeros(numberOfBoids,numberOfBoids,4);
+  sumDistance = 0;
+  meanSeparation = 0;
+  counter = 0;
   for i = 1:numberOfBoids
     for j = i+1:numberOfBoids
       [xDistSquare, xIndex] = min([...
@@ -24,7 +27,10 @@ function visibilityMatrix = GetVisibilityWrapAround(boidPositions, ...
         (boidPositions(i,3) - boidPositions(j,3) - maxPositions(3))^2]);
       
       distance = sqrt(xDistSquare + yDistSquare + zDistSquare);
-
+      if(~isnan(distance))
+        sumDistance = sumDistance + distance; 
+        counter = counter+1;
+      end
       if(distance < visibilityRange)
         visibilityMatrix(i,j,1) = 1;
         visibilityMatrix(j,i,1) = 1;
@@ -40,6 +46,9 @@ function visibilityMatrix = GetVisibilityWrapAround(boidPositions, ...
       end
 
     end
+  end
+  if (counter ~= 0)
+      meanSeparation = sumDistance/counter;
   end
 end
 
