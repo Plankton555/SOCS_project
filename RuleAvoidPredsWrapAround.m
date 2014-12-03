@@ -1,15 +1,39 @@
-function avoidPredVelocity = RuleAvoidPredsWrapAround(predPositions, visiblePredators,iBoidPosition, avoidPredFactor, dimension)
+function avoidPredVelocity = RuleAvoidPredsWrapAround(predPositions, ...
+  visiblePredators,iBoidPosition, maxPositions, avoidPredFactor,...
+  visibilityRange, dimension)
 %RuleAvoidPreds Summary of this function goes here
 
-%Needs to be updated
-
-avoidPredVelocity = zeros(1,dimension);
-
-for jPred = visiblePredators
-    differVector = (predPositions(jPred,:) - iBoidPosition);
-    avoidPredVelocity = avoidPredVelocity - 1./(differVector+0.1);
-    %BEWARE OF MAGICAL NUMBERS!
-end
-avoidPredVelocity = avoidPredFactor * avoidPredVelocity;
+  avoidPredVelocity = zeros(1,dimension);
+  
+  for jPred = visiblePredators
+    [xDistSquare, xIndex] = min([...
+      (predPositions(jPred,1) - iBoidPosition(1) + maxPositions(1))^2,...
+      (predPositions(jPred,1) - iBoidPosition(1))^2,...
+      (predPositions(jPred,1) - iBoidPosition(1) - maxPositions(1))^2]);
+    xDiff = predPositions(jPred,1) - iBoidPosition(1) + ...
+      (2-xIndex)*maxPositions(1);
+    
+    [yDistSquare, yIndex] = min([...
+      (predPositions(jPred,2) - iBoidPosition(2) + maxPositions(2))^2,...
+      (predPositions(jPred,2) - iBoidPosition(2))^2,...
+      (predPositions(jPred,2) - iBoidPosition(2) - maxPositions(2))^2]);
+    yDiff = predPositions(jPred,2) - iBoidPosition(2) + ...
+      (2-yIndex)*maxPositions(2);
+    
+    [zDistSquare, zIndex] = min([...
+      (predPositions(jPred,3) - iBoidPosition(3) + maxPositions(3))^2,...
+      (predPositions(jPred,3) - iBoidPosition(3))^2,...
+      (predPositions(jPred,3) - iBoidPosition(3) - maxPositions(3))^2]);
+    zDiff = predPositions(jPred,3) - iBoidPosition(3) + ...
+      (2-zIndex)*maxPositions(3);
+    
+    distance = sqrt(xDistSquare + yDistSquare + zDistSquare);
+    if(distance<=visibilityRange)
+      differVector = [xDiff,yDiff,zDiff];
+      avoidPredVelocity = avoidPredVelocity - 1./(differVector+0.1);
+      %BEWARE OF MAGICAL NUMBERS!
+    end
+  end
+  avoidPredVelocity = avoidPredFactor * avoidPredVelocity;
 end
 

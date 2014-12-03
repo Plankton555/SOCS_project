@@ -4,7 +4,8 @@ function PlotBoidVelocity(time, dataMeanVelocity)
 
 figure;
 plot(time, dataMeanVelocity);
-legend('velocity (x axis)', 'velocity (y axis)', 'velocity (z axis)', 'speed', 'Location', 'best');
+legend('velocity (x axis)', 'velocity (y axis)', 'velocity (z axis)',...
+  'speed', 'Location', 'best');
 
 end
 
