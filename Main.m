@@ -3,8 +3,9 @@
 close all; clc;
 tic();
 
-numberOfIterations = 200;
-numberOfBoids = 30;
+
+numberOfIterations = 100;
+numberOfBoids = 50;
 numberOfPreds = 1;
 deltaT = 0.5;
 
@@ -47,6 +48,7 @@ end
 if doDataGathering
     time = (1:numberOfIterations)'*deltaT;
     dataMeanVelocity = zeros(numberOfIterations, nrDimens+1);
+    dataMeanSeparation = zeros(numberOfIterations,1);
 end
 
 %%
@@ -91,11 +93,13 @@ for i = 1:numberOfIterations
   end
   if doDataGathering
       dataMeanVelocity(i,:) = DataGatherVelocity(boidVelocities);
+      dataMeanSeparation(i) = DataGatherSeparation(boidPositions);
   end
   
 end
 
 if doDataGathering
     PlotBoidVelocity(time, dataMeanVelocity);
+    PlotBoidSeparationDistance(time, dataMeanSeparation);
 end
 toc();
