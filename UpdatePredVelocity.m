@@ -10,11 +10,12 @@ function [predVelocity,targetPreyIndex] = UpdatePredVelocity(predPositions, pred
 
 
     %Cohesion part
-    [v1,targetPreyIndex] = RuleHuntBoids(predPositions, boidPositions, iPred, huntingFactor);
+    [v1,targetPreyIndex] = RuleHuntBoids(predPositions, boidPositions, ...
+      iPred, huntingFactor);
 
-    %Keep them in a region
-    v2 = RuleRestrictedRegion(predPositions, maxPos,iPred, ...
-        restrictionFactor);
+%     %Keep them in a region
+%     v2 = RuleRestrictedRegion(predPositions, maxPos,iPred, ...
+%         restrictionFactor);
     v2 = zeros(1,3);
 
     predVelocity = predVelocities(iPred,:) + v1 + v2;

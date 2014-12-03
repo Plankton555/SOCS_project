@@ -3,7 +3,6 @@
 close all; clc;
 tic();
 
-
 numberOfIterations = 100;
 numberOfBoids = 50;
 numberOfPreds = 1;
