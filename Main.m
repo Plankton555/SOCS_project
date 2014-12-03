@@ -3,8 +3,8 @@
 close all; clc;
 tic();
 
-numberOfIterations = 100;
-numberOfBoids = 50;
+numberOfIterations = 500;
+numberOfBoids = 30;
 numberOfPreds = 1;
 deltaT = 0.5;
 
@@ -100,6 +100,6 @@ end
 if doDataGathering
     PlotBoidVelocity(time, dataMeanVelocity);
     PlotBoidSeparationDistance(time, dataMeanSeparation);
-    PlotBoidPopulationSize(time, dataPopulationSize);
+    PlotBoidPopulationSize(time, dataPopulationSize, numberOfBoids);
 end
 toc();
