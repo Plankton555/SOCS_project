@@ -3,8 +3,8 @@
 close all; clc;
 tic();
 
-numberOfIterations = 500;
-numberOfBoids = 40;
+numberOfIterations = 100;
+numberOfBoids = 50;
 numberOfPreds = 1;
 deltaT = 0.5;
 
@@ -15,10 +15,11 @@ doDataGathering = 1;
 cohesionFactor = 0.01;
 alignmentFactor = 0.15;
 separationFactor = 0.02;
+% separationFactor = 0;
 separationRadius = 30;
 maxVelocityBoid = 3;
 maxVelocityPred = 4;
-maxPositions = [150,150,150];
+maxPositions = [300,300,300];
 restrictionFactor = 0.05;
 huntingFactor = 0.3;
 avoidPredFactor = 3;
@@ -58,7 +59,6 @@ for i = 1:numberOfIterations
   
 
   for iBoid = 1:numberOfBoids
-    
 %     visibleNeighbours = find(visibilityMatrix(iBoid,:));
 %     boidVelocities(iBoid,:) = UpdateBoidVelocity(boidPositions, boidVelocities,...
 %     predPositions, paramVector,visibleNeighbours, iBoid);

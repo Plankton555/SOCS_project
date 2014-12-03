@@ -18,6 +18,7 @@ function boidVelocity = UpdateBoidVelocityWrapAround(boidPositions, boidVelociti
   maxVelocity = paramVector(5);
   maxPos = paramVector(6:8);
   restrictionFactor = paramVector(9);
+  visibilityRange = paramVector(10);
   avoidPredFactor = paramVector(13);
   
   if any(visibleNeighbours)
@@ -46,7 +47,7 @@ function boidVelocity = UpdateBoidVelocityWrapAround(boidPositions, boidVelociti
   % Can see all predators atm
   visiblePredators = 1:size(predPositions,1);
   v5 = RuleAvoidPredsWrapAround(predPositions, visiblePredators,...
-    boidPositions(iBoid,:), avoidPredFactor, dimension);
+    boidPositions(iBoid,:), maxPos, avoidPredFactor, visibilityRange,dimension);
   
   boidVelocity = boidVelocities(iBoid,:) + v1 + v2 + v3 + v4 + v5;
   
