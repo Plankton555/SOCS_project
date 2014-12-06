@@ -10,7 +10,7 @@ deltaT = 0.5;
 
 doPlot = 1;
 doDataGathering = 1;
-
+targetIndex = zeros(numberOfIterations,numberOfPreds);
 % Parameters
 cohesionFactor = 0.01;
 alignmentFactor = 0.15;
@@ -89,6 +89,6 @@ end
 if doDataGathering
   PlotBoidVelocity(time, dataMeanVelocity);
   PlotBoidSeparationDistance(time, dataMeanSeparation);
-  PlotBoidPopulationSize(time, dataPopulationSize);
+  PlotBoidPopulationSize(time, dataPopulationSize, numberOfBoids);
 end
 toc();

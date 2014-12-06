@@ -5,6 +5,7 @@ function PlotBoidSeparationDistance(time, dataMeanSeparation)
 figure;
 plot(time, dataMeanSeparation);
 grid on;
+ylim([0 max(dataMeanSeparation)*1.1]);
 legend('average separation distance', 'Location', 'best');
 
 end
