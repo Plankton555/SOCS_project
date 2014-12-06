@@ -1,24 +1,17 @@
-function [predVelocity,targetPreyIndex] = UpdatePredVelocity(predPositions, predVelocities,...
-    boidPositions, iPred, paramVector)
+function [predVelocity,targetPreyIndex] = UpdatePredVelocity(boidPositions, ...
+  predPositions, predVelocities, iPred, paramVector)
     %UpdatePredVelocity Function to update the velocities of the predators
 
     % Extract parameters from paramVector
     maxPos = paramVector(6:8);
-    restrictionFactor = paramVector(9);
     huntingFactor = paramVector(11);
     maxVelocityPred = paramVector(12);
 
-
     %Cohesion part
-    [v1,targetPreyIndex] = RuleHuntBoids(predPositions, boidPositions, ...
-      iPred, huntingFactor);
+    [v1,targetPreyIndex] = RuleHuntBoids(boidPositions, ...
+      predPositions(iPred,:),maxPos, huntingFactor);
 
-%     %Keep them in a region
-%     v2 = RuleRestrictedRegion(predPositions, maxPos,iPred, ...
-%         restrictionFactor);
-    v2 = zeros(1,3);
-
-    predVelocity = predVelocities(iPred,:) + v1 + v2;
+    predVelocity = predVelocities(iPred,:) + v1;
 
     % Restrict maximum velocity
     n = norm(predVelocity);
