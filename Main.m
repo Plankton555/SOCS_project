@@ -5,12 +5,12 @@ tic();
 
 numberOfIterations = 1000;
 numberOfBoids = 100;
-numberOfPreds = 1;
+numberOfPreds = 0;
 deltaT = 0.5;
 
-doPlot = 0;
+doPlot = 1;
 doDataGathering = 1;
-doFlocking = 0;
+doFlocking = 1;
 
 targetIndex = zeros(numberOfIterations,numberOfPreds);
 % Parameters
