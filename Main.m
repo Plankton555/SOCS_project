@@ -3,17 +3,23 @@
 close all; clc;
 tic();
 
-numberOfIterations = 500;
+numberOfIterations = 1000;
 numberOfBoids = 30;
 numberOfPreds = 1;
 deltaT = 0.5;
 
 doPlot = 1;
 doDataGathering = 1;
+doFlocking = 0;
 
 % Parameters
-cohesionFactor = 0.01;
-alignmentFactor = 0.15;
+if doFlocking
+    cohesionFactor = 0.01;
+    alignmentFactor = 0.15;
+else
+    cohesionFactor = 0;
+    alignmentFactor = 0;
+end
 separationFactor = 0.02;
 % separationFactor = 0;
 separationRadius = 30;
