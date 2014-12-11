@@ -14,7 +14,7 @@ doPlot = 1;
 doDataGathering = 1;
 doFlocking = 1;
 
-targetIndex = zeros(numberOfIterations,numberOfPreds);
+targetIndex = ones(numberOfIterations,numberOfAddedPred);
 % Parameters
 if doFlocking
     cohesionFactor = 0.01;
@@ -26,7 +26,7 @@ end
 separationFactor = 0.02;
 separationRadius = 30;
 maxVelocityBoid = 3;
-maxVelocityPred = 4;
+maxVelocityPred = maxVelocityBoid*1.05;
 maxPositions = [300,300,300];
 restrictionFactor = 0.05; %not used currently
 huntingFactor = 0.8;
@@ -67,7 +67,6 @@ for i = 1:numberOfIterations
     numberOfPreds = numberOfAddedPred;
     predPositions = InitializePositions(numberOfPreds, maxPositions);
     predVelocities = InitializeVelocities(numberOfPreds, maxVelocityPred);
-    targetIndex = zeros(numberOfIterations,numberOfPreds);
   end
   
   [visibilityMatrix, dataMeanSeparation(i)] = GetVisibilityWrapAround(boidPositions,maxPositions,...
@@ -83,6 +82,10 @@ for i = 1:numberOfIterations
   for iPred = 1:numberOfPreds
     [predVelocities(iPred,:),targetIndex(i,iPred)] = UpdatePredVelocity(boidPositions,...
       predPositions, predVelocities,iPred, paramVector);
+  end
+  if (sum(targetIndex(i,:)) == 0)
+    fprintf('Stopping simulation, no boids left');
+    break;  %stop simulation if no more boids
   end
   boidVelocities = CrazyBoid(boidVelocities,pCrazy,maxVelocityBoid);
   
