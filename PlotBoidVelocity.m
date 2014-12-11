@@ -5,8 +5,10 @@ function PlotBoidVelocity(time, dataMeanVelocity)
 figure;
 plot(time, dataMeanVelocity);
 grid on;
-legend('velocity (x axis)', 'velocity (y axis)', 'velocity (z axis)',...
-  'speed', 'Location', 'best');
+legend('Velocity (x axis)', 'Velocity (y axis)', 'Velocity (z axis)',...
+  'Speed', 'Location', 'best');
+xlabel('Time');
+ylabel('Quantity');
 
 end
 

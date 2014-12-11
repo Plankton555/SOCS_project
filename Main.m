@@ -5,12 +5,12 @@ tic();
 
 numberOfIterations = 500;
 numberOfBoids = 100;
-numberOfPreds = 0;
+numberOfPreds = 1;
 deltaT = 0.5;
 addPredTime = 200;
 numberOfAddedPred =1;
 
-doPlot = 1;
+doPlot = 0;
 doDataGathering = 1;
 doFlocking = 1;
 

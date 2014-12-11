@@ -7,6 +7,8 @@ plot(time, dataPopulationSize);
 grid on;
 ylim([0 numberOfBoids]);
 legend('Population size', 'Location', 'best');
+xlabel('Time');
+ylabel('Population size');
 
 end
 
