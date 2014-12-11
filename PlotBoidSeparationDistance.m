@@ -2,13 +2,16 @@ function PlotBoidSeparationDistance(time, dataMeanSeparation)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 
-figure;
+handler = figure;
 plot(time, dataMeanSeparation);
 grid on;
 ylim([0 max(dataMeanSeparation)*1.1]);
-legend('Average separation distance', 'Location', 'best');
+title('Average separation distance')
 xlabel('Time');
-ylabel('Average separation distance');
+ylabel('Unit length');
+
+saveas(handler,'Images/Average-separation-distance.png')
+saveas(handler,'Images/Average-separation-distance.eps')
 
 end
 

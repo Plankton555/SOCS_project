@@ -35,14 +35,20 @@ function [  ] = PlotBoidsRelations(boidPositions,maxPositions, atTime)
   meanNumAtDist = mean(numAtDist,2);
   %maxMean = max(meanNumAtDist);
   sumMean = sum(meanNumAtDist);
-  figure
+  handler = figure;
   %plot(distance,meanNumAtDist/sumMean)
   %bar(distance,meanNumAtDist/sumMean)
   %hist(distance, 100)
   scatter(distance,meanNumAtDist/sumMean, 'xr')
+  hold on
+  grid on
   xlim([0 norm(maxPositions)/2]);
   xlabel('Distance')
   ylabel('Percentage of boids')
   title(sprintf('Distance distribution at time=%.2f', atTime));
+  
+  saveas(handler,sprintf('Images/Distance-distribution-at-time=%.2f.png', atTime))
+  saveas(handler,sprintf('Images/Distance-distribution-at-time=%.2f.eps', atTime))
+  
 end
 

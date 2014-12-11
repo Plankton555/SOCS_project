@@ -114,5 +114,6 @@ if doDataGathering
   PlotBoidSeparationDistance(time, dataMeanSeparation);
   PlotBoidPopulationSize(time, dataPopulationSize, numberOfBoids);
   PlotBoidsRelations(boidPositions,maxPositions, numberOfIterations*deltaT)
+  PlotHuntingTarget(targetIndex);
 end
 toc();
