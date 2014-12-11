@@ -5,14 +5,14 @@ tic();
 
 numberOfIterations = 500;
 numberOfBoids = 100;
-numberOfPreds = 1;
+numberOfPreds = 0;
 deltaT = 0.5;
-addPredTime = 200;
+addPredIteration = 300;
 numberOfAddedPred =1;
 
-doPlot = 0;
+doPlot = 1;
 doDataGathering = 1;
-doFlocking = 1;
+doFlocking = 0;
 
 targetIndex = zeros(numberOfIterations,numberOfPreds);
 % Parameters
@@ -63,7 +63,7 @@ end
 for i = 1:numberOfIterations
   fprintf('Iteration: %i \t Time: %.1f\n', i, i*deltaT);
   
-  if(i == addPredTime)
+  if(i == addPredIteration)
     numberOfPreds = numberOfAddedPred;
     predPositions = InitializePositions(numberOfPreds, maxPositions);
     predVelocities = InitializeVelocities(numberOfPreds, maxVelocityPred);
