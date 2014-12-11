@@ -1,4 +1,4 @@
-function [  ] = PlotBoidsRelations(boidPositions,maxPositions)
+function [  ] = PlotBoidsRelations(boidPositions,maxPositions, atTime)
 %PlotBoidsRelations Summary of this function goes here
  [numberOfBoids,~] = size(boidPositions);
 
@@ -21,7 +21,11 @@ function [  ] = PlotBoidsRelations(boidPositions,maxPositions)
         (boidPositions(givenBoid,3) - boidPositions(otherBoid,3))^2,...
         (boidPositions(givenBoid,3) - boidPositions(otherBoid,3) - maxPositions(3))^2]);
       
-      distanceMatrix(otherBoid,givenBoid) = sqrt(xDistSquare + yDistSquare + zDistSquare);
+      if givenBoid == otherBoid
+        distanceMatrix(otherBoid,givenBoid) = NaN;
+      else
+        distanceMatrix(otherBoid,givenBoid) = sqrt(xDistSquare + yDistSquare + zDistSquare);
+      end
       
     end
   end
@@ -29,10 +33,16 @@ function [  ] = PlotBoidsRelations(boidPositions,maxPositions)
   [numAtDist,distance] = hist(distanceMatrix,150);
   
   meanNumAtDist = mean(numAtDist,2);
-  maxMean = max(meanNumAtDist);
+  %maxMean = max(meanNumAtDist);
+  sumMean = sum(meanNumAtDist);
   figure
-  plot(distance,meanNumAtDist/maxMean)
+  %plot(distance,meanNumAtDist/sumMean)
+  %bar(distance,meanNumAtDist/sumMean)
+  %hist(distance, 100)
+  scatter(distance,meanNumAtDist/sumMean, 'xr')
+  xlim([0 norm(maxPositions)/2]);
   xlabel('Distance')
-  ylabel('Quantity')
+  ylabel('Percentage of boids')
+  title(sprintf('Distance distribution at time=%.2f', atTime));
 end
 
