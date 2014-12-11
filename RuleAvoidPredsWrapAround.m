@@ -30,8 +30,7 @@ function avoidPredVelocity = RuleAvoidPredsWrapAround(predPositions, ...
     distance = sqrt(xDistSquare + yDistSquare + zDistSquare);
     if(distance<=visibilityRange)
       differVector = [xDiff,yDiff,zDiff];
-      avoidPredVelocity = avoidPredVelocity - 1./(differVector+0.1);
-      %BEWARE OF MAGICAL NUMBERS!
+      avoidPredVelocity = avoidPredVelocity - 1./(differVector);
     end
   end
   avoidPredVelocity = avoidPredFactor * avoidPredVelocity;

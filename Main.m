@@ -3,16 +3,16 @@
 close all; clc;
 tic();
 
-numberOfIterations = 100;
+numberOfIterations = 300;
 numberOfBoids = 100;
 numberOfPreds = 0; % do not use this...
 deltaT = 0.5;
-addPredIteration = 300;
+addPredIteration = 100;
 numberOfAddedPred =1;
 
 doPlot = 1;
 doDataGathering = 1;
-doFlocking = 0;
+doFlocking = 1;
 
 targetIndex = zeros(numberOfIterations,numberOfPreds);
 % Parameters

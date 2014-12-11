@@ -13,7 +13,7 @@ for jBoid = visibleNeighbours
     maxPos(3)*distFactors(1,jBoid,3)']...
     - boidPositions(iBoid,:));
   if(norm(differVector) < separationRadius)
-    separationVelocity = separationVelocity - 1./(differVector+0.2);
+    separationVelocity = separationVelocity - 1./(differVector+0.0);
     %BEWARE OF MAGICAL NUMBERS!
   end
 end
