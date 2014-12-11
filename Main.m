@@ -3,9 +3,9 @@
 close all; clc;
 tic();
 
-numberOfIterations = 500;
+numberOfIterations = 100;
 numberOfBoids = 100;
-numberOfPreds = 0;
+numberOfPreds = 0; % do not use this...
 deltaT = 0.5;
 addPredIteration = 300;
 numberOfAddedPred =1;
@@ -28,7 +28,7 @@ separationRadius = 30;
 maxVelocityBoid = 3;
 maxVelocityPred = 4;
 maxPositions = [300,300,300];
-restrictionFactor = 0.05;
+restrictionFactor = 0.05; %not used currently
 huntingFactor = 0.8;
 avoidPredFactor = 3;
 visibilityRange = 40;
@@ -99,6 +99,9 @@ for i = 1:numberOfIterations
   if doDataGathering
     dataMeanVelocity(i,:) = DataGatherVelocity(boidVelocities);
     dataPopulationSize(i) = DataGatherPopulationSize(boidPositions);
+    if i==30 || i==round(numberOfIterations/2)
+      PlotBoidsRelations(boidPositions,maxPositions, i*deltaT)
+    end
   end
   
 end
@@ -107,6 +110,6 @@ if doDataGathering
   PlotBoidVelocity(time, dataMeanVelocity);
   PlotBoidSeparationDistance(time, dataMeanSeparation);
   PlotBoidPopulationSize(time, dataPopulationSize, numberOfBoids);
-  PlotBoidsRelations(boidPositions,maxPositions)
+  PlotBoidsRelations(boidPositions,maxPositions, numberOfIterations*deltaT)
 end
 toc();
