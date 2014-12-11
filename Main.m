@@ -3,10 +3,12 @@
 close all; clc;
 tic();
 
-numberOfIterations = 1000;
+numberOfIterations = 500;
 numberOfBoids = 100;
 numberOfPreds = 1;
 deltaT = 0.5;
+addPredTime = 200;
+numberOfAddedPred =1;
 
 doPlot = 0;
 doDataGathering = 1;
@@ -31,7 +33,7 @@ huntingFactor = 0.8;
 avoidPredFactor = 3;
 visibilityRange = 40;
 pCrazy = 0.01;
-huntRadius = 5;
+huntRadius = 2;
 
 nrDimens = numel(maxPositions);
 
@@ -44,8 +46,8 @@ paramVector = [cohesionFactor, alignmentFactor, separationFactor, ...
 % Initialise simulation
 boidPositions = InitializePositions(numberOfBoids, maxPositions);
 boidVelocities = InitializeVelocities(numberOfBoids, maxVelocityBoid);
-predPositions = InitializePositions(numberOfPreds, maxPositions);
-predVelocities = InitializeVelocities(numberOfPreds, maxVelocityPred);
+predPositions = InitializePositions(0, maxPositions);
+predVelocities = InitializeVelocities(0, maxVelocityPred);
 
 if doPlot
   [plotBoidHandler, plotPredHandler] = PlotBoidsNPreds(boidPositions,boidVelocities,predPositions,predVelocities,maxPositions);
@@ -60,6 +62,14 @@ end
 %%
 for i = 1:numberOfIterations
   fprintf('Iteration: %i \t Time: %.1f\n', i, i*deltaT);
+  
+  if(i == addPredTime)
+    numberOfPreds = numberOfAddedPred;
+    predPositions = InitializePositions(numberOfPreds, maxPositions);
+    predVelocities = InitializeVelocities(numberOfPreds, maxVelocityPred);
+    targetIndex = zeros(numberOfIterations,numberOfPreds);
+  end
+  
   [visibilityMatrix, dataMeanSeparation(i)] = GetVisibilityWrapAround(boidPositions,maxPositions,...
     visibilityRange);
     
