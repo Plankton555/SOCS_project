@@ -3,9 +3,9 @@
 close all; clc;
 tic();
 
-numberOfIterations = 500;
+numberOfIterations = 100;
 numberOfBoids = 100;
-numberOfPreds = 1;
+numberOfPreds = 0; % do not use this...
 deltaT = 0.5;
 addPredTime = 200;
 numberOfAddedPred =1;
