@@ -6,7 +6,9 @@ figure;
 plot(time, dataMeanSeparation);
 grid on;
 ylim([0 max(dataMeanSeparation)*1.1]);
-legend('average separation distance', 'Location', 'best');
+legend('Average separation distance', 'Location', 'best');
+xlabel('Time');
+ylabel('Average separation distance');
 
 end
 
