@@ -1,7 +1,9 @@
-function PlotHuntingTarget( targetIndex )
+function PlotHuntingTarget(deltaT, targetIndex, addPredIteration)
 
+nrIterations = size(targetIndex,1);
+xAxis = (deltaT*addPredIteration):deltaT:(deltaT*nrIterations);
 handler = figure;
-plot(targetIndex,'.');
+plot(xAxis, targetIndex(addPredIteration:end),'.');
 grid on;
 title('Targeting of the predators')
 xlabel('Time');

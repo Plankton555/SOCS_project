@@ -3,14 +3,14 @@
 close all; clc;
 tic();
 
-numberOfIterations = 3000;
+numberOfIterations = 300;
 numberOfBoids = 100;
 numberOfPreds = 0; % do not use this...
 deltaT = 0.5;
 addPredIteration = 100;
 numberOfAddedPred =1;
 
-doPlot = 1;
+doPlot = 0;
 doDataGathering = 1;
 doFlocking = 1;
 
@@ -23,8 +23,8 @@ else
     cohesionFactor = 0;
     alignmentFactor = 0;
 end
-separationFactor = 0.02;
-separationRadius = 30;
+separationFactor = 0.1;
+separationRadius = 20;
 maxVelocityBoid = 3;
 maxVelocityPred = maxVelocityBoid*1.05;
 maxPositions = [300,300,300];
@@ -114,6 +114,6 @@ if doDataGathering
   PlotBoidSeparationDistance(time, dataMeanSeparation);
   PlotBoidPopulationSize(time, dataPopulationSize, numberOfBoids);
   PlotBoidsRelations(boidPositions,maxPositions, numberOfIterations*deltaT)
-  PlotHuntingTarget(targetIndex);
+  PlotHuntingTarget(deltaT, targetIndex, addPredIteration);
 end
 toc();
