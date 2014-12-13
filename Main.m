@@ -3,7 +3,7 @@
 close all; clc;
 tic();
 
-numberOfIterations = 300;
+numberOfIterations = 3000;
 numberOfBoids = 100;
 numberOfPreds = 0; % do not use this...
 deltaT = 0.5;
@@ -30,8 +30,8 @@ maxVelocityPred = maxVelocityBoid*1.05;
 maxPositions = [300,300,300];
 restrictionFactor = 0.05; %not used currently
 huntingFactor = 0.8;
-avoidPredFactor = 3;
-visibilityRange = 40;
+avoidPredFactor = 10;
+visibilityRange = 80;
 pCrazy = 0.01;
 huntRadius = 2;
 

@@ -1,0 +1,1 @@
+dummy file to make sure the Images folder exists (program crashes otherwise)
