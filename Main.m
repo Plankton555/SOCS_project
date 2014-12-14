@@ -3,14 +3,14 @@
 close all; clc;
 tic();
 
-numberOfIterations = 300;
+numberOfIterations = 3000;
 numberOfBoids = 100;
 numberOfPreds = 0; % do not use this...
 deltaT = 0.5;
 addPredIteration = 100;
 numberOfAddedPred =1;
 
-doPlot = 0;
+doPlot = 1;
 doDataGathering = 1;
 doFlocking = 1;
 
@@ -23,10 +23,10 @@ else
     cohesionFactor = 0;
     alignmentFactor = 0;
 end
-separationFactor = 0.1;
-separationRadius = 20;
+separationFactor = 0.5;
+separationRadius = 15;
 maxVelocityBoid = 3;
-maxVelocityPred = maxVelocityBoid*1.05;
+maxVelocityPred = maxVelocityBoid*1.1;
 maxPositions = [300,300,300];
 restrictionFactor = 0.05; %not used currently
 huntingFactor = 0.8;
@@ -95,7 +95,7 @@ for i = 1:numberOfIterations
   [boidPositions, boidVelocities] = CheckPredsVSPrey(boidPositions, ...
     boidVelocities, predPositions,targetIndex ,huntRadius, i);
   
-  if doPlot
+  if (doPlot && mod(i,5)==0)
     UpdatePlotBoidsNPreds(plotBoidHandler, plotPredHandler);
     drawnow;
   end
