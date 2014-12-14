@@ -10,9 +10,10 @@ legend('x-axis', 'y-axis', 'z-axis','Speed', 'Location', 'best');
 xlabel('Time');
 ylabel('Unitlength per timestep');
 
-saveas(handler,'Images/Velocity.png')
-
-saveas(handler,'Images/Velocity.eps','epsc')
+%saveas(handler,'Images/Velocity.png')
+%saveas(handler,'Images/Velocity.eps','epsc')
+saveas(handler,'C:/tmpplots/Velocity.png')
+saveas(handler,'C:/tmpplots/Velocity.eps','epsc')
 
 end
 

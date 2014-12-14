@@ -47,8 +47,10 @@ function [  ] = PlotBoidsRelations(boidPositions,maxPositions, atTime)
   ylabel('Percentage of boids')
   title(sprintf('Distance distribution at time=%.2f', atTime));
   
-  saveas(handler,sprintf('Images/Distance-distribution-at-time=%.2f.png', atTime))
-  saveas(handler,sprintf('Images/Distance-distribution-at-time=%.2f.eps', atTime),'epsc')
+  %saveas(handler,sprintf('Images/Distance-distribution-at-time=%.2f.png', atTime))
+  %saveas(handler,sprintf('Images/Distance-distribution-at-time=%.2f.eps', atTime),'epsc')
+  saveas(handler,sprintf('C:/tmpplots/Distance-distribution-at-time=%.2f.png', atTime))
+  saveas(handler,sprintf('C:/tmpplots/Distance-distribution-at-time=%.2f.eps', atTime),'epsc')
   
 end
 

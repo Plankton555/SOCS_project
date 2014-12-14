@@ -3,11 +3,11 @@
 close all; clc;
 tic();
 
-visibilityRange_tmp = [20; 50; 80; 120];
+visibilityRange_tmp = [20; 30; 40; 50; 80; 120];
 nrBoids_tmp = [25; 50; 100; 200];
 
 numberOfIterations = 5000;
-numberOfBoids = nrBoids_tmp(1);
+numberOfBoids = nrBoids_tmp(4);
 numberOfPreds = 0; % do not use this...
 deltaT = 0.5;
 addPredIteration = 100;
@@ -35,7 +35,7 @@ maxPositions = [300,300,300];
 restrictionFactor = 0.05; %not used currently
 huntingFactor = 0.8;
 avoidPredFactor = 10;
-visibilityRange = visibilityRange_tmp(1);
+visibilityRange = visibilityRange_tmp(6);
 pCrazy = 0.01;
 huntRadius = 2;
 

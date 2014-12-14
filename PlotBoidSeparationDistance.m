@@ -10,8 +10,10 @@ title('Average separation distance')
 xlabel('Time');
 ylabel('Unit length');
 
-saveas(handler,'Images/Average-separation-distance.png')
-saveas(handler,'Images/Average-separation-distance.eps','epsc')
+%saveas(handler,'Images/Average-separation-distance.png')
+%saveas(handler,'Images/Average-separation-distance.eps','epsc')
+saveas(handler,'C:/tmpplots/Average-separation-distance.png')
+saveas(handler,'C:/tmpplots/Average-separation-distance.eps','epsc')
 
 end
 

@@ -10,8 +10,11 @@ title('Population size');
 xlabel('Time');
 ylabel('Percentage of population size');
 
-saveas(handler,'Images/Population size.png')
-saveas(handler,'Images/Population size.eps','epsc')
+%saveas(handler,'Images/Population size.png')
+%saveas(handler,'Images/Population size.eps','epsc')
+saveas(handler,'C:/tmpplots/Population size.png')
+saveas(handler,'C:/tmpplots/Population size.eps','epsc')
+
 
 end
 

@@ -10,8 +10,10 @@ xlabel('Time');
 ylabel('Prey identifier');
 
 
-saveas(handler,'Images/Targeting-of-the-predators.png')
-saveas(handler,'Images/Targeting-of-the-predators.eps','epsc')
+%saveas(handler,'Images/Targeting-of-the-predators.png')
+%saveas(handler,'Images/Targeting-of-the-predators.eps','epsc')
+saveas(handler,'C:/tmpplots/Targeting-of-the-predators.png')
+saveas(handler,'C:/tmpplots/Targeting-of-the-predators.eps','epsc')
 
 end
 
