@@ -3,16 +3,17 @@
 close all; clc;
 tic();
 
-numberOfIterations = 3000;
+numberOfIterations = 10000;
 numberOfBoids = 100;
 numberOfPreds = 0; % do not use this...
 deltaT = 0.5;
 addPredIteration = 100;
 numberOfAddedPred =1;
 
-doPlot = 1;
+doPlot = 0;
 doDataGathering = 1;
 doFlocking = 1;
+doPred = 0;
 
 targetIndex = ones(numberOfIterations,numberOfAddedPred);
 % Parameters
@@ -63,7 +64,7 @@ end
 for i = 1:numberOfIterations
   fprintf('Iteration: %i \t Time: %.1f\n', i, i*deltaT);
   
-  if(i == addPredIteration)
+  if(doPred && i == addPredIteration)
     numberOfPreds = numberOfAddedPred;
     predPositions = InitializePositions(numberOfPreds, maxPositions);
     predVelocities = InitializeVelocities(numberOfPreds, maxVelocityPred);
