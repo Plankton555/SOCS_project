@@ -11,7 +11,7 @@ ylabel('Prey identifier');
 
 
 saveas(handler,'Images/Targeting-of-the-predators.png')
-saveas(handler,'Images/Targeting-of-the-predators.eps')
+saveas(handler,'Images/Targeting-of-the-predators.eps','epsc')
 
 end
 

@@ -11,7 +11,7 @@ xlabel('Time');
 ylabel('Percentage of population size');
 
 saveas(handler,'Images/Population size.png')
-saveas(handler,'Images/Population size.eps')
+saveas(handler,'Images/Population size.eps','epsc')
 
 end
 

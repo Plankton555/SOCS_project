@@ -12,7 +12,7 @@ ylabel('Unitlength per timestep');
 
 saveas(handler,'Images/Velocity.png')
 
-saveas(handler,'Images/Velocity.eps')
+saveas(handler,'Images/Velocity.eps','epsc')
 
 end
 
