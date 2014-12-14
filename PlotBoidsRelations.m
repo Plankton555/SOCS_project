@@ -48,7 +48,7 @@ function [  ] = PlotBoidsRelations(boidPositions,maxPositions, atTime)
   title(sprintf('Distance distribution at time=%.2f', atTime));
   
   saveas(handler,sprintf('Images/Distance-distribution-at-time=%.2f.png', atTime))
-  saveas(handler,sprintf('Images/Distance-distribution-at-time=%.2f.eps', atTime))
+  saveas(handler,sprintf('Images/Distance-distribution-at-time=%.2f.eps', atTime),'epsc')
   
 end
 
