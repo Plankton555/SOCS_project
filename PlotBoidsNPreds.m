@@ -1,5 +1,5 @@
-function [boidHandler, predHandler] = PlotBoidsNPreds(boidPositions,boidVelocities,predPositions,predVelocities,maxPositions)
-figHandler = figure();
+function [figHandler, boidHandler, predHandler] = PlotBoidsNPreds(boidPositions,boidVelocities,predPositions,predVelocities,maxPositions)
+figHandler = figure('Position',[100 100 800 600])
 boidHandler = quiver3(boidPositions(:,1),boidPositions(:,2),...
   boidPositions(:,3),boidVelocities(:,1),boidVelocities(:,2),boidVelocities(:,3),'bo','Autoscale','off');
 hold on
@@ -21,6 +21,9 @@ grid on
 
 % 
 set(figHandler,'DoubleBuffer','on')
+set(figHandler,'nextplot','replacechildren');
+set(figHandler,'Renderer','zbuffer');
+
 % % 
 set(boidHandler,'XDataSource','boidPositions(:,1)')
 set(boidHandler,'YDataSource','boidPositions(:,2)')
