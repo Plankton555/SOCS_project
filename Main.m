@@ -13,7 +13,7 @@ numberOfAddedPred =1;
 doPlot = 1;
 doDataGathering = 0;
 doFlocking = 1;
-doPred = 1;
+doPred = 0;
 doRecord= 1;
 
 targetIndex = ones(numberOfIterations,numberOfAddedPred);
@@ -69,7 +69,10 @@ if doRecord
 end
 
 %%
+azimuth = -37.5;
 for i = 1:numberOfIterations
+  view([azimuth 20]);
+  azimuth = azimuth + 0.5;
   fprintf('Iteration: %i \t Time: %.1f\n', i, i*deltaT);
   
   if(doPred && i == addPredIteration)

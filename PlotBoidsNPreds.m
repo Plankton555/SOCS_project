@@ -44,6 +44,7 @@ title('Boid model')
 xlabel('x')
 ylabel('y')
 zlabel('z')
+axis vis3d
 
 
 
